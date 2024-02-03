@@ -19,7 +19,7 @@ const signup = async (req, res, next) => {
       res.status(201).json("User created successfully ✅");
     } else {
       const error = new Error();
-      error.message = "Failed to create user 📛";
+      error.message = "Failed to create user";
       error.statusCode = 500;
       throw error;
     }
