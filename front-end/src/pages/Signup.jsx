@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -26,16 +27,21 @@ const Signup = () => {
       // console.log(data);
 
       if (data.success === false) {
-        setError(data.message);
+        // setError(data.message);
         setLoading(false);
+        toast.error(data.message);
         return;
       }
       setLoading(false);
       setError(null);
-      navigate("/login");
+      toast.success("Account created successfully");
+      setTimeout(() => {
+        return navigate("/login");
+      }, 2000);
     } catch (err) {
       setLoading(false);
       setError(err.message);
+      toast.error(err.message);
     }
   };
 
@@ -105,7 +111,6 @@ const Signup = () => {
           <span className="text-blue-700 underline">Log In</span>
         </Link>
       </div>
-      {error && <p className="text-red-500 mt-3">{error}</p>}
     </div>
   );
 };
