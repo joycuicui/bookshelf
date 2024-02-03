@@ -36,7 +36,7 @@ const login = async (req, res, next) => {
 
     if (!validUser) {
       const error = new Error();
-      error.message = "User not found ❓";
+      error.message = "User not found";
       error.statusCode = 404;
       throw error;
     }
@@ -45,7 +45,7 @@ const login = async (req, res, next) => {
 
     if (!validPassword) {
       const error = new Error();
-      error.message = "Invalid credentials ❌";
+      error.message = "Invalid credentials";
       error.statusCode = 401;
       throw error;
     }
