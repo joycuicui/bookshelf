@@ -1,16 +1,31 @@
 const db = require("../connection");
 
-const getAllUsers = () => {
-  return db.query("SELECT * FROM users ORDER BY id;").then((res) => res.rows);
+const createUser = async ({ name, email, password }) => {
+  try {
+    const res = await db.query(
+      "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *;",
+      [name, email, password]
+    );
+    const user = res.rows[0];
+    return user || null;
+  } catch (err) {
+    console.log(err.message);
+  }
 };
 
-const getUserById = (id) => {
-  return db
-    .query("SELECT * FROM users WHERE id = $1;", [id])
-    .then((res) => res.rows);
+const getUserByEmail = async (email) => {
+  try {
+    const res = await db.query("SELECT * FROM users WHERE email ILIKE $1;", [
+      email,
+    ]);
+    const user = res.rows[0];
+    return user || null;
+  } catch (err) {
+    console.log(err.message);
+  }
 };
 
 module.exports = {
-  getAllUsers,
-  getUserById,
+  createUser,
+  getUserByEmail,
 };
