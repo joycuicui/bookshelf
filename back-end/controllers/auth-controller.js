@@ -34,9 +34,21 @@ const login = async (req, res, next) => {
   try {
     const validUser = await getUserByEmail(email);
 
-    if (!validUser) console.log("User not found");
+    if (!validUser) {
+      const error = new Error();
+      error.message = "User not found ❓";
+      error.statusCode = 404;
+      throw error;
+    }
+
     const validPassword = bcrypt.compareSync(password, validUser.password);
-    if (!validPassword) console.log("Invalid password");
+
+    if (!validPassword) {
+      const error = new Error();
+      error.message = "Invalid credentials ❌";
+      error.statusCode = 401;
+      throw error;
+    }
 
     const token = jwt.sign({ id: validUser.id }, process.env.JWT_SECRET);
     const { password: pass, ...rest } = validUser;
