@@ -18,10 +18,14 @@ const signup = async (req, res, next) => {
     if (newUser) {
       res.status(201).json("User created successfully ✅");
     } else {
-      res.status(500).json("Failed to create user 📛");
+      const error = new Error();
+      error.message = "Failed to create user 📛";
+      error.statusCode = 500;
+      throw error;
     }
   } catch (err) {
-    console.log(err.message);
+    // calling the error-handling middleware
+    next(err);
   }
 };
 
@@ -41,7 +45,8 @@ const login = async (req, res, next) => {
       .status(200)
       .json(rest);
   } catch (err) {
-    console.log(err.message);
+    // calling the error-handling middleware
+    next(err);
   }
 };
 
