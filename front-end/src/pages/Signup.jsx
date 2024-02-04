@@ -100,7 +100,7 @@ const Signup = () => {
 
         <button
           disabled={loading}
-          className="mt-2 bg-emerald-700 text-white p-3 rounded-xl uppercase shadow-md duration-300 transform ease-in-out hover:shadow-lg hover:-translate-y-1 active:translate-y-0 disabled:opacity-80 disabled:cursor-wait"
+          className="button-effect mt-2 bg-emerald-700 text-white p-3 rounded-xl uppercase disabled:opacity-80 disabled:cursor-wait"
         >
           {loading ? "loading..." : "sign up"}
         </button>

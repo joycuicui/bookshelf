@@ -3,3 +3,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .button-effect {
+    @apply shadow-md duration-300 transform ease-in-out hover:shadow-lg hover:-translate-y-1 active:translate-y-0;
+  }
+}
