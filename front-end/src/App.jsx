@@ -6,6 +6,8 @@ import Signup from "./pages/Signup";
 import About from "./pages/About";
 import Header from "./components/Header";
 import Search from "./pages/Search";
+import UserPage from "./pages/UserPage";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 const App = () => {
   return (
@@ -15,9 +17,12 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/about" element={<About />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="user" element={<UserPage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
       <Toaster
