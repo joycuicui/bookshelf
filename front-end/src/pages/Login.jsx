@@ -1,12 +1,20 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import toast from "react-hot-toast";
+
+import {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+} from "../redux/user/userSlice";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const { loading, error } = useSelector((state) => state.user);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -17,7 +25,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
+      dispatch(loginStart());
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -28,19 +36,17 @@ const Login = () => {
 
       if (data.success === false) {
         // setError(data.message);
-        setLoading(false);
+        dispatch(loginFailure(data.message));
         toast.error(data.message);
         return;
       }
-      setLoading(false);
-      setError(null);
+      dispatch(loginSuccess(data));
       toast.success("Logged in successfully");
       setTimeout(() => {
         return navigate("/");
       }, 2000);
     } catch (err) {
-      setLoading(false);
-      setError(err.message);
+      dispatch(loginFailure(err.message));
       toast.error(err.message);
     }
   };
@@ -85,7 +91,7 @@ const Login = () => {
 
         <button
           disabled={loading}
-          className="mt-2 bg-emerald-700 text-white p-3 rounded-xl uppercase shadow-md duration-300 transform ease-in-out hover:shadow-lg hover:-translate-y-1 active:translate-y-0 disabled:opacity-80 disabled:cursor-wait"
+          className="button-effect mt-2 bg-emerald-700 text-white p-3 rounded-xl uppercase disabled:opacity-80 disabled:cursor-wait"
         >
           {loading ? "loading..." : "log in"}
         </button>
