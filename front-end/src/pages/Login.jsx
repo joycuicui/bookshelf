@@ -55,7 +55,7 @@ const Login = () => {
       const formattedName = formatName(data.name);
       toast(`Welcome back, ${formattedName}!`, { icon: "🎉" });
       setTimeout(() => {
-        return navigate("/");
+        return navigate("/user/books");
       }, 2000);
     } catch (err) {
       dispatch(loginFailure(err.message));
@@ -75,6 +75,7 @@ const Login = () => {
             type="email"
             id="email"
             placeholder=" "
+            required
             className="block p-3 pt-4 w-full text-sm text-gray-900 bg-transparent border-2 border-gray-500 rounded-xl appearance-none focus:outline-none focus:ring-0 focus:border-emerald-600 peer"
           />
           <label
@@ -91,6 +92,7 @@ const Login = () => {
             type="password"
             id="password"
             placeholder=" "
+            required
             className="block p-3 pt-4 w-full text-sm text-gray-900 bg-transparent border-2 border-gray-500 rounded-xl appearance-none focus:outline-none focus:ring-0 focus:border-emerald-600 peer"
           />
           <label
