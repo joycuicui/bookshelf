@@ -75,7 +75,7 @@ const Header = () => {
           {currentUser ? (
             <div className="flex gap-3 ml-3">
               <li>
-                <Link to="/user" className="hover:underline">
+                <Link to="/user/books" className="hover:underline">
                   <img
                     src={currentUser.avatar}
                     alt="User Avatar"
