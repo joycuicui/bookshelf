@@ -57,6 +57,7 @@ const Signup = () => {
             type="text"
             id="name"
             placeholder=" "
+            required
             className="block p-3 pt-4 w-full text-sm text-gray-900 bg-transparent border-2 border-gray-500 rounded-xl appearance-none focus:outline-none focus:ring-0 focus:border-emerald-600 peer"
           />
           <label
@@ -73,6 +74,7 @@ const Signup = () => {
             type="email"
             id="email"
             placeholder=" "
+            required
             className="block p-3 pt-4 w-full text-sm text-gray-900 bg-transparent border-2 border-gray-500 rounded-xl appearance-none focus:outline-none focus:ring-0 focus:border-emerald-600 peer"
           />
           <label
@@ -88,6 +90,7 @@ const Signup = () => {
             type="password"
             id="password"
             placeholder=" "
+            required
             className="block p-3 pt-4 w-full text-sm text-gray-900 bg-transparent border-2 border-gray-500 rounded-xl appearance-none focus:outline-none focus:ring-0 focus:border-emerald-600 peer"
           />
           <label
