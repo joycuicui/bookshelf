@@ -34,7 +34,7 @@ const Header = () => {
       dispatch(logoutSuccess());
       toast.success("Logged out successfully");
       setTimeout(() => {
-        return navigate("/");
+        return navigate("/login");
       }, 2000);
     } catch (err) {
       toast.error(err.message);
@@ -76,15 +76,11 @@ const Header = () => {
             <div className="flex gap-3 ml-3">
               <li>
                 <Link to="/user" className="hover:underline">
-                  {currentUser.avatar ? (
-                    <img src={currentUser.avatar} alt="User Avatar" />
-                  ) : (
-                    <img
-                      src="/default-user.jpg"
-                      alt="Default User Avatar"
-                      className="button-effect rounded-full w-9 h-9"
-                    />
-                  )}
+                  <img
+                    src={currentUser.avatar}
+                    alt="User Avatar"
+                    className="button-effect rounded-full w-9 h-9"
+                  />
                 </Link>
               </li>
               <li
