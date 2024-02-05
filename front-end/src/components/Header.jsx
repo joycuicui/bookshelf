@@ -42,12 +42,12 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-emerald-50 shadow-sm">
+    <header className="bg-emerald-50 shadow-sm border-b-2 border-gray-100">
       <div className="flex justify-between items-center mx-2 sm:mx-10 p-3 sm:py-4">
-        <h1 className="font-bold text-sm sm:text-2xl">
+        <Link to="/" className="font-bold text-sm sm:text-2xl">
           <span className="text-emerald-600">Book</span>
           <span className="text-emerald-800">Haven</span>
-        </h1>
+        </Link>
         <form
           onSubmit={handleSubmit}
           className="bg-emerald-100 p-1 rounded-full flex items-center gap-2"
