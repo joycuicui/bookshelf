@@ -9,6 +9,17 @@ import {
   loginFailure,
 } from "../redux/user/userSlice";
 
+const formatName = (name) => {
+  if (name.includes(" ")) {
+    return name
+      .split(" ")
+      .map((el) => el.charAt(0).toUpperCase() + el.slice(1).toLowerCase())
+      .join(" ");
+  } else {
+    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+  }
+};
+
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -41,7 +52,8 @@ const Login = () => {
         return;
       }
       dispatch(loginSuccess(data));
-      toast.success("Logged in successfully");
+      const formattedName = formatName(data.name);
+      toast(`Welcome back, ${formattedName}!`, { icon: "🎉" });
       setTimeout(() => {
         return navigate("/");
       }, 2000);
