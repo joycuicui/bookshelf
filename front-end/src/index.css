@@ -9,3 +9,11 @@
     @apply shadow-md duration-300 transform ease-in-out hover:shadow-lg hover:-translate-y-1 active:translate-y-0;
   }
 }
+
+.active {
+  @apply text-emerald-800 font-semibold underline;
+}
+
+a.active > svg {
+  @apply text-emerald-600;
+}
