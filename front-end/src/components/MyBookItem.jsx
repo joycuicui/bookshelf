@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { HiMiniCheckCircle, HiChevronDown } from "react-icons/hi2";
 
-const MyBookItem = () => {
+const MyBookItem = ({ book }) => {
+  const { title, author, cover_image } = book;
+
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -43,15 +45,13 @@ const MyBookItem = () => {
   return (
     <div className="mx-12 mt-8 flex gap-16 border border-gray-300 rounded-lg shadow justify-between">
       <img
-        src="/default-cover-image.png"
+        src={`/${cover_image}`}
         alt="Book Cover"
         className="w-56 rounded-l-lg"
       />
       <div className="flex flex-col gap-2 pt-3 flex-grow">
-        <p className="text-gray-700 font-semibold text-xl pt-2">
-          A Tale of Two Cities
-        </p>
-        <p>by Charles Dickens</p>
+        <p className="text-gray-700 font-semibold text-xl pt-2">{title}</p>
+        <p>by {author}</p>
         <div className="mt-2 flex flex-col gap-3 items-start">
           <label className="flex items-center">
             <progress max="100" value={progressPercentage}></progress>
