@@ -6,14 +6,46 @@
 
 @layer components {
   .button-effect {
-    @apply shadow-md duration-300 transform ease-in-out hover:shadow-lg hover:-translate-y-1 active:translate-y-0;
+    @apply shadow-md duration-300 transform ease-in-out hover:shadow-lg hover:-translate-y-1 hover:opacity-90 active:translate-y-0 active:opacity-100;
   }
 }
 
+/* active class provided by NavLink */
 .active {
   @apply text-emerald-800 font-semibold underline;
 }
 
 a.active > svg {
   @apply text-emerald-600;
+}
+
+/* Reading Progress Bar styling */
+progress[value] {
+  /* the width*/
+  --w: 300px;
+  /* the progress color */
+  --color: linear-gradient(90deg, #fbbf24, #84cc16) 0 / var(--w);
+  /* the background color */
+  --background: lightgrey;
+  height: 25px;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  width: var(--w);
+  border-radius: 10em;
+  background: var(--background);
+}
+progress[value]::-webkit-progress-bar {
+  border-radius: 10em;
+  background: var(--background);
+}
+progress[value]::-webkit-progress-value {
+  border-radius: 10em;
+  background: var(--color);
+}
+progress[value]::-moz-progress-bar {
+  border-radius: 10em;
+  background: var(--color);
 }
