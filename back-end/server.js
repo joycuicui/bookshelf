@@ -4,6 +4,7 @@ require("dotenv").config();
 // dependencies
 const express = require("express");
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -13,12 +14,16 @@ app.use(morgan("dev"));
 // parsing json data
 app.use(express.json());
 
+app.use(cookieParser());
+
 // routes
 // const userRouter = require("./routes/user-router");
 const authRouter = require("./routes/auth-router");
+const readingListsRouter = require("./routes/readingLists-router");
 
 // app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/readinglists", readingListsRouter);
 
 // error-handling middleware - catch errors and send error response to the client
 // trigger this middleware by calling next() with an error object in route handlers
