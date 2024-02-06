@@ -105,7 +105,7 @@ const Login = () => {
 
         <button
           disabled={loading}
-          className="button-effect mt-2 bg-emerald-700 text-white p-3 rounded-xl uppercase disabled:opacity-80 disabled:cursor-wait"
+          className="button-effect tracking-wider mt-2 bg-emerald-700 text-white p-3 rounded-xl uppercase disabled:opacity-80 disabled:cursor-wait"
         >
           {loading ? "loading..." : "log in"}
         </button>

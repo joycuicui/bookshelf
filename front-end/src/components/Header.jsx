@@ -42,7 +42,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-emerald-50 shadow-sm border-b-2 border-gray-100">
+    <header className="sticky top-0 z-50 bg-emerald-50 shadow-sm border-b-2 border-gray-100">
       <div className="flex justify-between items-center mx-2 sm:mx-10 p-3 sm:py-4">
         <Link to="/" className="font-bold text-sm sm:text-2xl">
           <span className="text-emerald-600">Book</span>
@@ -77,7 +77,7 @@ const Header = () => {
               <li>
                 <Link to="/user/books" className="hover:underline">
                   <img
-                    src={currentUser.avatar}
+                    src={`/${currentUser.avatar}`}
                     alt="User Avatar"
                     className="button-effect rounded-full w-9 h-9"
                   />
