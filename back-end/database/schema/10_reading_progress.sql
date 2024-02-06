@@ -8,6 +8,6 @@ CREATE TABLE reading_progress (
   book_id INTEGER NOT NULL REFERENCES books(id) ON DELETE CASCADE,
   current_page INTEGER NOT NULL,
   total_page INTEGER NOT NULL,
-  updated_at TIMESTAMP NOT NULL,
-  delta INTEGER NOT NULL
+  updated_at TIMESTAMP NOT NULL
+  -- delta INTEGER NOT NULL
   );

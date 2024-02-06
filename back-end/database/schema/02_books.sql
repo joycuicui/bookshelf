@@ -5,9 +5,9 @@ CREATE TABLE books (
   id SERIAL PRIMARY KEY NOT NULL,
   title VARCHAR(255) NOT NULL,
   description VARCHAR(255) NOT NULL,
-  cover_image TEXT NOT NULL,
-  publisher VARCHAR(255) NOT NULL,
-  published_date DATE NOT NULL,
-  isbn VARCHAR(255) NOT NULL,
-  external_id VARCHAR(255) NOT NULL
+  publisher VARCHAR(255),
+  published_date DATE,
+  isbn VARCHAR(255),
+  external_id VARCHAR(255),
+  cover_image TEXT DEFAULT 'default-cover-image.png'
   );
