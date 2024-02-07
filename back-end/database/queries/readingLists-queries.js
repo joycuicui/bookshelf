@@ -10,7 +10,7 @@ const getAllReadingListsByUserId = async (userId) => {
       book_authors.id AS book_author_id,
       books.id AS book_id,
       books.title AS title,
-      books.cover_image AS cover_image,
+      books.cover_image_medium AS cover_image,
       authors.name AS author
       FROM book_lists  
       JOIN lists ON book_lists.list_id = lists.id
