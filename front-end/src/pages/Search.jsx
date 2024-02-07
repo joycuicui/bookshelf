@@ -51,7 +51,7 @@ const Search = () => {
                 <p className="text-gray-500 font-semibold text top-2 right-2">Page count: {item.number_of_pages_median}</p>
               </div>
               <div className=" flex flex-col justify-center bottom-4 right-4">
-                <button type="button" class="focus:outline-none text-white bg-green-400 hover:bg-green-800  focus:ring-green-300 focus:bg-green-800 active:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-200 dark:hover:bg-green-700 dark:focus:ring-green-00">Add book</button>
+                <button type="button" className="focus:outline-none text-white bg-green-400 hover:bg-green-800  focus:ring-green-300 focus:bg-green-800 active:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-200 dark:hover:bg-green-700 dark:focus:ring-green-00">Add book</button>
               </div>
             </li>
           </div>
