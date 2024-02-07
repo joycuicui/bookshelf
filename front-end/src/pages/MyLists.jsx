@@ -65,9 +65,10 @@ const MyBookCard = ({ book }) => {
   return (
     <div className="mx-12 mt-10 border border-gray-300 rounded-lg shadow max-w-56">
       <img
-        src={`/${cover_image}`}
+        // src={`/${cover_image}`}
+        src={cover_image}
         alt="Book Cover"
-        className="w-56 rounded-t-lg"
+        className="w-56 rounded-t-lg object-cover"
       />
       <div className="px-2 pb-2">
         <p className="text-gray-700 font-semibold pt-2">{title}</p>
