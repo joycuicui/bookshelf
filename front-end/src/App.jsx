@@ -1,5 +1,9 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -8,14 +12,23 @@ import Header from "./components/Header";
 import Search from "./pages/Search";
 import UserPage from "./pages/UserPage";
 import ProtectedRoute from "./pages/ProtectedRoute";
-import MyBooks from "./pages/MyBooks";
+import MyProgress from "./pages/MyProgress";
 import MyLists from "./pages/MyLists";
 import MyReviews from "./pages/MyReviews";
 import MySettings from "./pages/MySettings";
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 0,
+    },
+  },
+});
+
 const App = () => {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools />
       <BrowserRouter>
         <Header />
         <Routes>
@@ -26,7 +39,7 @@ const App = () => {
           <Route path="signup" element={<Signup />} />
           <Route element={<ProtectedRoute />}>
             <Route path="user" element={<UserPage />}>
-              <Route path="books" element={<MyBooks />} />
+              <Route path="books" element={<MyProgress />} />
               <Route path="lists" element={<MyLists />} />
               <Route path="reviews" element={<MyReviews />} />
               <Route path="settings" element={<MySettings />} />
@@ -54,7 +67,7 @@ const App = () => {
           },
         }}
       />
-    </>
+    </QueryClientProvider>
   );
 };
 
