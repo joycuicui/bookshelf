@@ -5,19 +5,30 @@ import {
 } from "react-icons/hi2";
 import { useSelector, useDispatch } from "react-redux";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 import { logoutSuccess } from "../redux/user/userSlice";
 
-const Header = () => {
+const Header = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const { currentUser } = useSelector((state) => state.user);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
-    navigate("/search");
+    try {
+      const response = await fetch(`https://openlibrary.org/search.json?q=${searchTerm}`);
+      const result = await response.json();
+      setSearchResults(result.docs);
+      navigate(`/search?q=${searchTerm}`);
+    } catch (err) {
+      setError(err.message);
+    }
   };
+
 
   const handleLogout = async (e) => {
     try {
@@ -40,7 +51,7 @@ const Header = () => {
       toast.error(err.message);
     }
   };
-
+ 
   return (
     <header className="sticky top-0 z-50 bg-emerald-50 shadow-sm border-b-2 border-gray-100">
       <div className="flex justify-between items-center mx-2 sm:mx-10 p-3 sm:py-4">
@@ -48,13 +59,12 @@ const Header = () => {
           <span className="text-emerald-600">Book</span>
           <span className="text-emerald-800">Haven</span>
         </Link>
-        <form
-          onSubmit={handleSubmit}
-          className="bg-emerald-100 p-1 rounded-full flex items-center gap-2"
-        >
+        <form onSubmit={handleSearch} className="bg-emerald-100 p-1 rounded-full flex items-center gap-2">
           <input
             type="text"
             placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             className="outline-none w-28 rounded-full bg-emerald-100 px-4 py-2  transition-all duration-300 focus:ring focus:ring-emerald-300 focus:ring-opacity-50 sm:w-72 sm:focus:w-96"
           />
           <button type="submit">
