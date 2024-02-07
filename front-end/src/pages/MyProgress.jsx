@@ -15,17 +15,17 @@ const testBooks = [
   },
 ];
 
-const MyBooks = () => {
+const MyProgress = () => {
   const mappedBooks = testBooks.map((book) => (
     <MyBookItem key={book.id} book={book} />
   ));
 
   return (
     <div>
-      <h1 className="text-gray-600 font-semibold text-2xl">My Books</h1>
+      <h1 className="text-gray-600 font-semibold text-2xl">My Progress</h1>
       {mappedBooks}
     </div>
   );
 };
 
-export default MyBooks;
+export default MyProgress;
