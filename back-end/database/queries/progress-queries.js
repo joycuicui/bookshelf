@@ -27,6 +27,35 @@ const getProgressByUserId = async (userId) => {
   }
 };
 
+const updateProgressByBookId = async (bookId, currentPage) => {
+  try {
+    const bookAuthorQuery = await db.query(
+      `
+      SELECT id FROM book_authors
+      WHERE book_id = $1;
+      `,
+      [bookId]
+    );
+    const bookAuthorId = bookAuthorQuery.rows[0].id;
+    console.log(bookAuthorId);
+
+    const res = await db.query(
+      `
+      UPDATE reading_progress
+      SET current_page = $1, updated_at = NOW()
+      WHERE book_author_id = $2
+      RETURNING *;
+      `,
+      [currentPage, bookAuthorId]
+    );
+    const progress = res.rows[0];
+    return progress;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
 module.exports = {
   getProgressByUserId,
+  updateProgressByBookId,
 };
