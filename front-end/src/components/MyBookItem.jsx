@@ -2,13 +2,21 @@ import { useState } from "react";
 import { HiMiniCheckCircle, HiChevronDown } from "react-icons/hi2";
 
 const MyBookItem = ({ book }) => {
-  const { title, author, cover_image } = book;
+  const {
+    book_id: bookId,
+    current_page: currentPage,
+    total_pages: totalPages,
+    title,
+    author,
+    cover_image,
+  } = book;
+  // const { title, author, cover_image } = book;
 
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const [currentPage, setCurrentPage] = useState(100);
-  const [totalPages, setTotalPages] = useState(500);
+  // const [currentPage, setCurrentPage] = useState(100);
+  // const [totalPages, setTotalPages] = useState(500);
 
   const progressPercentage = ((currentPage / totalPages) * 100).toFixed(2);
 
@@ -39,13 +47,14 @@ const MyBookItem = ({ book }) => {
   };
 
   const handleProgressInput = (e) => {
-    setCurrentPage(e.target.value);
+    // setCurrentPage(e.target.value);
   };
 
   return (
     <div className="mx-12 mt-8 flex gap-16 border border-gray-300 rounded-lg shadow justify-between">
       <img
-        src={`/${cover_image}`}
+        // src={`/${cover_image}`}
+        src={cover_image}
         alt="Book Cover"
         className="w-56 rounded-l-lg"
       />
@@ -94,7 +103,7 @@ const MyBookItem = ({ book }) => {
             onClick={handleSetReadingGoal}
             className="button-effect tracking-wide mt-2 bg-amber-700 text-white p-3 px-5 rounded-full disabled:opacity-80 disabled:cursor-wait"
           >
-            Set Reading Goal
+            Email Reminder
           </button>
         </div>
       </div>
