@@ -13,7 +13,7 @@ const Sidebar = () => {
         <li className="p-3 pl-7 items-center text-gray-600 text-lg font-medium hover:bg-gray-100 hover:rounded-lg visited:bg-gray-300">
           <NavLink to="/user/books" className="flex gap-2">
             <HiOutlineBookOpen className="text-xl w-7 h-7 text-gray-400" />
-            <span>My Books</span>
+            <span>My Progress</span>
           </NavLink>
         </li>
         <li className="p-3 pl-7 items-center text-gray-600 text-lg font-medium hover:bg-gray-100 hover:rounded-lg">
