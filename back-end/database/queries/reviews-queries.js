@@ -26,4 +26,22 @@ const getReviewsByUserId = async (userId) => {
   }
 };
 
-module.exports = { getReviewsByUserId };
+const updateReview = async (reviewId, review) => {
+  try {
+    const res = await db.query(
+      `
+      UPDATE reviews
+      SET user_review = $1
+      WHERE id = $2
+      RETURNING *;
+      `,
+      [review, reviewId]
+    );
+    const updatedReview = res.rows[0];
+    return updatedReview;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+module.exports = { getReviewsByUserId, updateReview };
