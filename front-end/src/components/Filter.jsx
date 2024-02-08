@@ -22,7 +22,7 @@ const Filter = ({ filterField, options }) => {
     </button>
   ));
   return (
-    <div className="border border-gray-100 rounded-md shadow-sm p-1 flex gap-1">
+    <div className="border bg-white border-gray-100 rounded-md shadow-sm p-1 flex gap-1">
       {mappedFilters}
     </div>
   );
