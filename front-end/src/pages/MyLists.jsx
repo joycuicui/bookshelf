@@ -5,15 +5,15 @@ import Filter from "../components/Filter";
 import { useReadingLists } from "../query/useReadingLists";
 import { useRemoveFromList } from "../query/useRemoveFromList";
 import { useMoveToList } from "../query/useMoveToList";
+import SortBy from "../components/SortBy";
 
 const MyLists = () => {
   const { isLoading, readingLists } = useReadingLists();
   const [searchParams] = useSearchParams();
   const filterValue = searchParams.get("list") || "want-to-read";
-  // console.log(filterValue);
 
+  // 1. FILTERING
   let filteredLists;
-
   if (filterValue === "want-to-read") {
     filteredLists = readingLists?.filter((book) => book.reading_list_id === 1);
   }
@@ -24,8 +24,18 @@ const MyLists = () => {
     filteredLists = readingLists?.filter((book) => book.reading_list_id === 3);
   }
 
-  // all books in reading lists for now
-  const mappedBooks = filteredLists?.map((book) => (
+  // 2. SORTING
+  const sortBy = searchParams.get("sortBy") || "title-asc";
+  const [field, direction] = sortBy.split("-");
+  const modifier = direction === "asc" ? 1 : -1;
+
+  const sortedLists = filteredLists?.slice().sort((a, b) => {
+    const aValue = a[field];
+    const bValue = b[field];
+    return (aValue < bValue ? -1 : aValue > bValue ? 1 : 0) * modifier;
+  });
+
+  const mappedBooks = sortedLists?.map((book) => (
     <MyBookCard key={book.book_list_id} book={book} />
   ));
 
@@ -37,14 +47,25 @@ const MyLists = () => {
         <h1 className="text-gray-600 font-semibold text-2xl">
           My Reading Lists
         </h1>
-        <Filter
-          filterField="list"
-          options={[
-            { value: "want-to-read", label: "Want to Read" },
-            { value: "reading", label: "Currently Reading" },
-            { value: "read", label: "Read" },
-          ]}
-        />
+        <div className="flex gap-2">
+          <Filter
+            filterField="list"
+            options={[
+              { value: "want-to-read", label: "Want to Read" },
+              { value: "reading", label: "Currently Reading" },
+              { value: "read", label: "Read" },
+            ]}
+          />
+
+          <SortBy
+            options={[
+              { value: "title-asc", label: "Sort by title (A-Z)" },
+              { value: "title-desc", label: "Sort by title (Z-A)" },
+              { value: "author-asc", label: "Sort by author (A-Z)" },
+              { value: "author-desc", label: "Sort by author (Z-A)" },
+            ]}
+          />
+        </div>
       </div>
       <div className="flex flex-wrap">{mappedBooks}</div>
     </div>
@@ -118,9 +139,8 @@ const MyBookCard = ({ book }) => {
         className="w-60 h-96 rounded-t-lg object-cover"
       />
       <div className="px-2 pb-2">
-        <p className="text-gray-700 font-semibold pt-2">{title}</p>
-        {showButtons ? "" : <p className="italic">by {author}</p>}
-        {/* <p className="italic">by {author}</p> */}
+        <p className="text-gray-700 font-semibold pt-2 truncate">{title}</p>
+        {showButtons ? "" : <p className="italic truncate">by {author}</p>}
       </div>
       <div
         className={`flex justify-between text-sm  ${
