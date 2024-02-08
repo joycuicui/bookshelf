@@ -1,6 +1,7 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { store } from "../redux/store";
+import { useEffect } from "react";
 
 const moveToListApi = async (listId, bookId) => {
   const { currentUser } = store.getState().user;
@@ -36,7 +37,10 @@ export const useMoveToList = () => {
     onSuccess: (data, variables) => {
       const listName = getListName(variables.listId);
       toast.success(`Book moved to ${listName}!`);
+      // queryClient.invalidateQueries({ queryKey: ["progress", "readingLists"] });
+
       queryClient.invalidateQueries({ queryKey: ["progress"] });
+      queryClient.invalidateQueries({ queryKey: ["readingLists"] });
     },
     onError: (err) => toast.error(err.message),
     mutationKey: "moveToList",
