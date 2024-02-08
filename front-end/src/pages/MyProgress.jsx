@@ -18,10 +18,11 @@ import { useProgress } from "../query/useProgress";
 
 const MyProgress = () => {
   const { isLoading, progress } = useProgress();
+  console.log("progress", progress);
 
-  const mappedBooks = progress?.map((book) => (
-    <MyBookItem key={book.id} book={book} />
-  ));
+  const mappedBooks = progress
+    ?.filter((book) => book.list_id === 2)
+    .map((book) => <MyBookItem key={book.id} book={book} />);
 
   if (isLoading) return <div className="spinner"></div>;
 
