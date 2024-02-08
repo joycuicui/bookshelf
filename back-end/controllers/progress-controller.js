@@ -21,8 +21,15 @@ const getProgress = async (req, res, next) => {
 const updateProgress = async (req, res, next) => {
   try {
     const { bookId } = req.params;
-    const { currentPage } = req.body;
-    const progress = await updateProgressByBookId(bookId, currentPage);
+    const { currentPage, totalPages } = req.body;
+    // console.log("bookId", bookId, typeof bookId);
+    // console.log("currentPage", currentPage, typeof currentPage);
+    // console.log("totalPages", totalPages, typeof totalPages);
+    const progress = await updateProgressByBookId(
+      bookId,
+      currentPage,
+      totalPages
+    );
     if (!progress) {
       const error = new Error();
       error.message = "Progress not updated";

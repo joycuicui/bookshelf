@@ -1,6 +1,7 @@
 const {
   getAllReadingListsByUserId,
   removeBookFromList,
+  updateList,
 } = require("../database/queries/readingLists-queries");
 
 const getAllReadingLists = async (req, res, next) => {
@@ -35,4 +36,21 @@ const removeFromList = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllReadingLists, removeFromList };
+const moveToAnotherList = async (req, res, next) => {
+  const { bookId, listId } = req.body;
+  // console.log(bookId, listId);
+  try {
+    const moved = await updateList(listId, bookId);
+    if (!moved) {
+      const error = new Error();
+      error.message = "Move to another list failed";
+      error.statusCode = 404;
+      return next(error);
+    }
+    res.status(200).json("Book moved to another list");
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { getAllReadingLists, removeFromList, moveToAnotherList };

@@ -47,7 +47,7 @@ const MyBookItem = ({ book }) => {
 
   const handleUpdateProgress = (e) => {
     e.preventDefault();
-    updateProgress({ bookId, currentPage: inputValue });
+    updateProgress({ bookId, currentPage: inputValue, totalPages });
     setShowUpdateForm(false);
   };
 
@@ -95,7 +95,7 @@ const MyBookItem = ({ book }) => {
                   placeholder="page #"
                   className="outline-none bg-gray-50 w-16"
                 />
-                <span>of 489</span>
+                <span>of {totalPages}</span>
                 <button type="submit">
                   <HiMiniCheckCircle className="text-emerald-600 mr-2 text-3xl cursor-pointer" />
                 </button>
