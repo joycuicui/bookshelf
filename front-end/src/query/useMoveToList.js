@@ -22,13 +22,20 @@ const moveToListApi = async (listId, bookId) => {
   }
 };
 
+const getListName = (id) => {
+  if (id === 1) return "Want to Read";
+  if (id === 2) return "Currently Reading";
+  if (id === 3) return "Read";
+};
+
 export const useMoveToList = () => {
   const queryClient = useQueryClient();
 
   const { isLoading: isMoving, mutate: moveToList } = useMutation({
     mutationFn: ({ listId, bookId }) => moveToListApi(listId, bookId),
-    onSuccess: () => {
-      toast.success("Book moved to another list");
+    onSuccess: (data, variables) => {
+      const listName = getListName(variables.listId);
+      toast.success(`Book moved to ${listName}!`);
       queryClient.invalidateQueries({ queryKey: ["progress"] });
     },
     onError: (err) => toast.error(err.message),
