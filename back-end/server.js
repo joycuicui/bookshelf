@@ -21,11 +21,13 @@ app.use(cookieParser());
 const authRouter = require("./routes/auth-router");
 const readingListsRouter = require("./routes/readingLists-router");
 const progressRouter = require("./routes/progress-router");
+const reviewsRouter = require("./routes/reviews-router");
 
 // app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/readinglists", readingListsRouter);
 app.use("/api/progress", progressRouter);
+app.use("/api/reviews", reviewsRouter);
 
 // error-handling middleware - catch errors and send error response to the client
 // trigger this middleware by calling next() with an error object in route handlers

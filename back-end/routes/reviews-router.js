@@ -1,0 +1,9 @@
+const express = require("express");
+const verifyToken = require("../helpers/verifyUser");
+const { getAllReviews } = require("../controllers/review-controller");
+
+const router = express.Router();
+
+router.get("/:userId", verifyToken, getAllReviews);
+
+module.exports = router;
