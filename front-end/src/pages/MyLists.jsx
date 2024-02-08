@@ -1,8 +1,10 @@
 import { useSearchParams } from "react-router-dom";
+import { useState } from "react";
 
 import Filter from "../components/Filter";
 import { useReadingLists } from "../query/useReadingLists";
 import { useRemoveFromList } from "../query/useRemoveFromList";
+import { useMoveToList } from "../query/useMoveToList";
 
 const MyLists = () => {
   const { isLoading, readingLists } = useReadingLists();
@@ -53,6 +55,34 @@ export default MyLists;
 
 const MyBookCard = ({ book }) => {
   const { isRemoving, removeBook } = useRemoveFromList();
+  const { isMoving, moveToList } = useMoveToList();
+  const [showButtons, setShowButtons] = useState(false);
+  const [searchParams] = useSearchParams();
+  const filterValue = searchParams.get("list") || "want-to-read";
+
+  let options = [];
+  if (filterValue === "want-to-read") {
+    options = [
+      { value: 0, label: "Move to List" },
+      { value: 2, label: "Currently Reading" },
+      { value: 3, label: "Read" },
+    ];
+  }
+  if (filterValue === "reading") {
+    options = [
+      { value: 0, label: "Move to List" },
+      { value: 1, label: "Want to Read" },
+      { value: 3, label: "Read" },
+    ];
+  }
+  if (filterValue === "read") {
+    options = [
+      { value: 0, label: "Move to List" },
+      { value: 1, label: "Want to Read" },
+      { value: 2, label: "Currently Reading" },
+    ];
+  }
+
   const {
     book_id: bookId,
     reading_list_id: readingListId,
@@ -62,82 +92,58 @@ const MyBookCard = ({ book }) => {
   } = book;
   // console.log(readingListId, bookId);
 
+  const handleMouseEnter = () => {
+    setShowButtons(true);
+  };
+  const handleMouseLeave = () => {
+    setShowButtons(false);
+  };
+
+  const handleMoveToList = (e) => {
+    const selectedListId = parseInt(e.target.value);
+    if (selectedListId === 0) return;
+    moveToList({ listId: selectedListId, bookId });
+  };
+
   return (
-    <div className="mx-12 mt-10 border border-gray-300 rounded-lg shadow max-w-56">
+    <div
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="mx-12 mt-10 border border-gray-300 rounded-lg shadow max-w-56"
+    >
       <img
         // src={`/${cover_image}`}
         src={cover_image}
         alt="Book Cover"
-        className="w-56 rounded-t-lg object-cover"
+        className="w-60 h-96 rounded-t-lg object-cover"
       />
       <div className="px-2 pb-2">
         <p className="text-gray-700 font-semibold pt-2">{title}</p>
-        <p className="italic">by {author}</p>
+        {showButtons ? "" : <p className="italic">by {author}</p>}
+        {/* <p className="italic">by {author}</p> */}
       </div>
-      <button onClick={() => removeBook({ listId: readingListId, bookId })}>
-        Remove
-      </button>
+      <div
+        className={`flex justify-between text-sm  ${
+          showButtons ? "block" : "hidden"
+        }`}
+      >
+        <button
+          onClick={() => removeBook({ listId: readingListId, bookId })}
+          className="pl-2 text-red-600"
+        >
+          Remove
+        </button>
+        <select
+          onChange={handleMoveToList}
+          className="border rounded-md shadow-sm"
+        >
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </div>
     </div>
   );
 };
-
-// import { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-
-// import {
-//   fetchReadingListStart,
-//   fetchReadingListSuccess,
-//   fetchReadingListFailure,
-// } from "../redux/readingList/readingListSlice";
-
-// const MyLists = () => {
-//   // const dispatch = useDispatch();
-//   // const { currentUser } = useSelector((state) => state.user);
-//   // const { lists, loading, error } = useSelector((state) => state.readingList);
-
-//   // useEffect(() => {
-//   //   const fetchReadingLists = async () => {
-//   //     dispatch(fetchReadingListStart());
-//   //     try {
-//   //       const response = await fetch(`/api/readinglists/${currentUser.id}`);
-//   //       const data = await response.json();
-//   //       console.log(data);
-//   //       if (data.success === false) {
-//   //         dispatch(fetchReadingListFailure(data.message));
-//   //         return;
-//   //       }
-//   //       dispatch(fetchReadingListSuccess(data));
-//   //     } catch (err) {
-//   //       dispatch(fetchReadingListFailure(err.message));
-//   //     }
-//   //   };
-//   //   fetchReadingLists();
-//   // }, [currentUser.id, dispatch]);
-
-//   // const { currentlyReading, wantToRead, finishedReading } = lists;
-
-//   // const mappedWantToRead = wantToRead.map((book) => (
-//   //   <BookCard key={book.id} book={book} />
-//   // ));
-
-//   // const mappedCurrentlyReading = currentlyReading.map((book) => (
-//   //   <BookCard key={book.id} book={book} />
-//   // ));
-
-//   // const mappedRead = finishedReading.map((book) => (
-//   //   <BookCard key={book.id} book={book} />
-//   // ));
-
-//   return (
-//     <div>
-//       <h1 className="text-gray-600 font-semibold text-2xl">My Reading Lists</h1>
-//       <div className="flex flex-wrap">
-//         {/* {wantToRead && mappedWantToRead}
-//         {currentlyReading && mappedCurrentlyReading}
-//         {finishedReading && mappedRead} */}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default MyLists;
