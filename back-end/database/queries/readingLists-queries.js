@@ -57,4 +57,40 @@ const removeBookFromList = async (listId, bookId) => {
   }
 };
 
-module.exports = { getAllReadingListsByUserId, removeBookFromList };
+const updateList = async (listId, bookId) => {
+  try {
+    const bookAuthorQuery = await db.query(
+      `
+    SELECT id FROM book_authors
+    WHERE book_id = $1;
+    `,
+      [bookId]
+    );
+    const bookAuthorId = bookAuthorQuery.rows[0].id;
+    const res = await db.query(
+      `
+    UPDATE book_lists
+    SET list_id = $1
+    WHERE book_author_id = $2
+    RETURNING *;
+    `,
+      [listId, bookAuthorId]
+    );
+
+    if (listId === 3) {
+      await db.query(
+        `
+        UPDATE reading_progress
+        SET current_page = total_pages, updated_at = NOW() 
+        WHERE book_author_id = $1;`,
+        [bookAuthorId]
+      );
+    }
+    console.log(res.rows[0]);
+    return res.rows[0];
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+module.exports = { getAllReadingListsByUserId, removeBookFromList, updateList };
