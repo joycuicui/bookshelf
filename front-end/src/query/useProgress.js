@@ -7,7 +7,7 @@ const fetchProgress = async () => {
   try {
     const response = await fetch(`/api/progress/${currentUser.id}`);
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     if (data.success === false) {
       throw new Error(data.message);
     }

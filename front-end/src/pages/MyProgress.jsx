@@ -18,7 +18,7 @@ import { useProgress } from "../query/useProgress";
 
 const MyProgress = () => {
   const { isLoading, progress } = useProgress();
-  console.log("progress", progress);
+  // console.log("progress", progress);
 
   const mappedBooks = progress
     ?.filter((book) => book.list_id === 2)
