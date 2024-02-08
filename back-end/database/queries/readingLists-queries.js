@@ -77,6 +77,47 @@ const updateList = async (listId, bookId) => {
       [listId, bookAuthorId]
     );
 
+    // check if the book is already in the reading progress table
+    const progressQuery = await db.query(
+      `
+      SELECT id FROM reading_progress
+      WHERE book_author_id = $1;
+      `,
+      [bookAuthorId]
+    );
+
+    // if it is not in reading progress, insert it into the table
+    if (progressQuery.rows.length === 0) {
+      const bookListQuery = await db.query(
+        `
+        SELECT id, user_id
+        FROM book_lists
+        WHERE book_author_id = $1;
+        `,
+        [bookAuthorId]
+      );
+      const bookListId = bookListQuery.rows[0].id;
+      const userId = bookListQuery.rows[0].user_id;
+      const totalPagesQuery = await db.query(
+        `
+        SELECT number_of_pages
+        FROM books
+        WHERE id = $1
+        `,
+        [bookId]
+      );
+
+      const totalPages = totalPagesQuery.rows[0].number_of_pages;
+      await db.query(
+        `
+        INSERT INTO reading_progress (book_list_id, user_id, book_author_id, current_page, total_pages, updated_at)
+        VALUES ($1, $2, $3, 0, $4, NOW());
+        `,
+        [bookListId, userId, bookAuthorId, totalPages]
+      );
+    }
+
+    // if moving the book to READ list, make the reading progress to be 100%
     if (listId === 3) {
       await db.query(
         `
