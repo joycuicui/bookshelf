@@ -2,6 +2,7 @@ import { useState } from "react";
 import { HiMiniCheckCircle, HiChevronDown } from "react-icons/hi2";
 
 import { useUpdateProgress } from "../query/useUpdateProgress";
+import { useMoveToList } from "../query/useMoveToList";
 
 const MyBookItem = ({ book }) => {
   const {
@@ -15,6 +16,7 @@ const MyBookItem = ({ book }) => {
   // const { title, author, cover_image } = book;
 
   const { isUpdating, updateProgress } = useUpdateProgress();
+  const { isMoving, moveToList } = useMoveToList();
 
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -53,6 +55,13 @@ const MyBookItem = ({ book }) => {
 
   const handleProgressInput = (e) => {
     setInputValue(e.target.value);
+  };
+
+  const handleMoveToWant = () => {
+    moveToList({ listId: 1, bookId });
+  };
+  const handleMoveToRead = () => {
+    moveToList({ listId: 3, bookId });
   };
 
   return (
@@ -132,10 +141,18 @@ const MyBookItem = ({ book }) => {
         >
           {showDropdown && (
             <ul className="py-2 text-sm text-gray-700">
-              <li className="block px-4 py-2 hover:bg-gray-100">
+              <li
+                onClick={handleMoveToWant}
+                className="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              >
                 Want To Read
               </li>
-              <li className="block px-4 py-2 hover:bg-gray-100">Finished</li>
+              <li
+                onClick={handleMoveToRead}
+                className="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              >
+                Read
+              </li>
             </ul>
           )}
         </div>
