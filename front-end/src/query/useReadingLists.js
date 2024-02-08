@@ -7,7 +7,7 @@ const fetchReadingLists = async () => {
   try {
     const response = await fetch(`/api/readinglists/${currentUser.id}`);
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     if (data.success === false) {
       throw new Error(data.message);
     }
@@ -16,21 +16,6 @@ const fetchReadingLists = async () => {
     throw new Error(err.message);
   }
 };
-
-// const addToList = async (bookId, listId) => {
-//   try {
-//     const response = await fetch(`/api/readinglists/${listId}/${bookId}`, {
-//       method: "POST",
-//     });
-//     const data = await response.json();
-//     if (data.success === false) {
-//       throw new Error(data.message);
-//     }
-//     return data;
-//   } catch (err) {
-//     throw new Error(err.message);
-//   }
-// }
 
 export const useReadingLists = () => {
   const {
