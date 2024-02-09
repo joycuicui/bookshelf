@@ -1,46 +1,55 @@
 import { useState } from "react";
 
 const messages = [
-  "I did not like it",
-  "It was OK",
-  "I liked it",
-  "I really liked it",
-  "It was amazing",
+  "I did not like it!",
+  "It was OK..",
+  "I liked it!",
+  "I really liked it!",
+  "It was amazing!",
 ];
 
-export default function StarRating({ ratedRating }) {
+export default function StarRating({ ratedRating, isEditing, onChange }) {
   const [rating, setRating] = useState(ratedRating || 0);
   const [tempRating, setTempRating] = useState(0);
-  const [userRating, setUserRating] = useState(0);
 
   function handleRating(rating) {
     setRating(rating);
-    setUserRating(rating);
+    onChange(rating);
   }
+
+  // console.log(editedRating);
 
   return (
     <div className="flex items-center gap-4">
       <div className="flex">
-        {Array.from({ length: 5 }, (_, i) => (
-          <Star
-            key={i}
-            full={tempRating ? tempRating >= i + 1 : rating >= i + 1}
-            onRate={() => handleRating(i + 1)}
-            onHoverIn={() => setTempRating(i + 1)}
-            onHoverOut={() => setTempRating(0)}
-          />
-        ))}
+        {Array.from({ length: 5 }, (_, i) =>
+          isEditing ? (
+            <Star
+              isEditing={true}
+              key={i}
+              full={tempRating ? tempRating >= i + 1 : rating >= i + 1}
+              onRate={() => handleRating(i + 1)}
+              onHoverIn={() => setTempRating(i + 1)}
+              onHoverOut={() => setTempRating(0)}
+            />
+          ) : (
+            <Star key={i} full={ratedRating >= i + 1} />
+          )
+        )}
       </div>
-      <p className="text-yellow-500">
-        {messages.length === 5
-          ? messages[tempRating ? tempRating - 1 : rating - 1]
-          : tempRating || rating || ""}
-      </p>
+
+      {isEditing ? (
+        <p className="text-yellow-500">
+          {messages[tempRating ? tempRating - 1 : rating - 1]}
+        </p>
+      ) : (
+        <p className="text-yellow-500">{messages[ratedRating - 1]}</p>
+      )}
     </div>
   );
 }
 
-function Star({ onRate, full, onHoverIn, onHoverOut }) {
+function Star({ onRate, full, onHoverIn, onHoverOut, isEditing }) {
   return (
     <span
       role="button"
@@ -55,6 +64,7 @@ function Star({ onRate, full, onHoverIn, onHoverOut }) {
           viewBox="0 0 20 20"
           fill="#fcc419"
           stroke="#fcc419"
+          className={isEditing ? "" : "cursor-default"}
         >
           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
         </svg>
@@ -64,6 +74,7 @@ function Star({ onRate, full, onHoverIn, onHoverOut }) {
           fill="none"
           viewBox="0 0 24 24"
           stroke="#fcc419"
+          className={isEditing ? "" : "cursor-default"}
         >
           <path
             strokeLinecap="round"
