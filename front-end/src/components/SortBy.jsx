@@ -14,7 +14,7 @@ const SortBy = ({ options }) => {
       value={sortBy}
       onChange={handleChange}
       className="border py-2 px-4 rounded-md font-semibold transition duration-300 
-      text-gray-700"
+      text-gray-700 cursor-pointer"
     >
       {options.map((option) => (
         <option key={option.value} value={option.value}>
