@@ -44,4 +44,20 @@ const updateReview = async (reviewId, review) => {
   }
 };
 
-module.exports = { getReviewsByUserId, updateReview };
+const removeReview = async (reviewId) => {
+  try {
+    const res = await db.query(
+      `
+      DELETE FROM reviews
+      WHERE id = $1
+      RETURNING *;
+      `,
+      [reviewId]
+    );
+    return res.rows[0];
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+module.exports = { getReviewsByUserId, updateReview, removeReview };
