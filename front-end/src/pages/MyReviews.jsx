@@ -7,6 +7,8 @@ import { useReviews } from "../query/useReviews";
 import { useState } from "react";
 import { useEditReview } from "../query/useEditReview";
 import { useDeleteReview } from "../query/useDeleteReview";
+import Modal from "../components/Modal";
+import EditReview from "../components/EditReview";
 
 const MyReviews = () => {
   const { isLoading, reviews } = useReviews();
@@ -58,6 +60,7 @@ const REVIEW_LIMIT = 540;
 
 const MyReviewCard = ({ book }) => {
   const { isDeleting, deleteReview } = useDeleteReview();
+  const [modalOpen, setModalOpen] = useState(false);
   const {
     id: reviewId,
     title,
@@ -79,6 +82,14 @@ const MyReviewCard = ({ book }) => {
     console.log("Edit review");
   };
 
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <div className="mx-12 mt-8 p-3 flex flex-col gap-3 border border-gray-300 rounded-lg shadow max-w-[46rem] h-[26rem] overflow-auto">
       <div className="flex justify-between gap-8">
@@ -98,7 +109,7 @@ const MyReviewCard = ({ book }) => {
         </div>
         <div className="flex gap-3 items-start m-3">
           <button
-            onClick={handleEditReview}
+            onClick={handleOpenModal}
             className="hover:underline text-emerald-600"
           >
             EDIT
@@ -136,6 +147,11 @@ const MyReviewCard = ({ book }) => {
             </>
           )}
         </button>
+        {modalOpen && (
+          <Modal onCloseModal={handleCloseModal}>
+            <EditReview book={book} onCloseModal={handleCloseModal} />
+          </Modal>
+        )}
       </div>
     </div>
   );
