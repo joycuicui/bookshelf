@@ -60,4 +60,25 @@ const removeReview = async (reviewId) => {
   }
 };
 
-module.exports = { getReviewsByUserId, updateReview, removeReview };
+const insertNewReview = async (userId, bookAuthorId, rating, review) => {
+  try {
+    const res = await db.query(
+      `
+      INSERT INTO reviews (user_id, book_author_id, rating, user_review)
+      VALUES ($1, $2, $3, $4)
+      RETURNING *;
+      `,
+      [userId, bookAuthorId, rating, review]
+    );
+    return res.rows[0];
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+module.exports = {
+  getReviewsByUserId,
+  updateReview,
+  removeReview,
+  insertNewReview,
+};

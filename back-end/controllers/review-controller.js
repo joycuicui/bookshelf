@@ -2,6 +2,7 @@ const {
   getReviewsByUserId,
   updateReview,
   removeReview,
+  insertNewReview,
 } = require("../database/queries/reviews-queries");
 
 const getAllReviews = async (req, res, next) => {
@@ -53,4 +54,26 @@ const deleteReview = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllReviews, editReview, deleteReview };
+const addReview = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const { bookAuthorId, rating, review } = req.body;
+    const newReview = await insertNewReview(
+      userId,
+      bookAuthorId,
+      rating,
+      review
+    );
+    if (!newReview) {
+      const error = new Error();
+      error.message = "Review not added";
+      error.statusCode = 404;
+      return next(error);
+    }
+    res.status(201).json(newReview);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { getAllReviews, editReview, deleteReview, addReview };
