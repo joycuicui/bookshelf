@@ -133,7 +133,7 @@ const MyBookCard = ({ book }) => {
     <div
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="mx-12 mt-10 border border-gray-300 rounded-lg shadow max-w-56"
+      className="mx-12 mt-10 pb-2 border border-gray-300 rounded-lg shadow max-w-56"
     >
       <img
         src={cover_image}
@@ -141,12 +141,12 @@ const MyBookCard = ({ book }) => {
         alt="Book Cover"
         className="w-60 h-96 rounded-t-lg object-cover"
       />
-      <div className="px-2 pb-2">
+      <div className="px-2">
         <p className="text-gray-700 font-semibold pt-2 truncate">{title}</p>
-        {showButtons ? "" : <p className="italic truncate">by {author}</p>}
+        {showButtons ? "" : <p className="italic truncate pt-1">by {author}</p>}
       </div>
       <div
-        className={`flex justify-between text-sm  ${
+        className={`flex justify-between text-sm pt-1 ${
           showButtons ? "block" : "hidden"
         }`}
       >
