@@ -1,7 +1,7 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 
-const updateReviewApi = async (reviewId, review) => {
+const updateReviewApi = async (reviewId, rating, review) => {
   if (!reviewId) {
     throw new Error("Invalid review ID");
   }
@@ -11,7 +11,7 @@ const updateReviewApi = async (reviewId, review) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ review }),
+      body: JSON.stringify({ rating, review }),
     });
     const data = await response.json();
     if (data.success === false) {
@@ -27,7 +27,8 @@ export const useEditReview = () => {
   const queryClient = useQueryClient();
 
   const { isLoading: isEditing, mutate: editReview } = useMutation({
-    mutationFn: ({ reviewId, review }) => updateReviewApi(reviewId, review),
+    mutationFn: ({ reviewId, rating, review }) =>
+      updateReviewApi(reviewId, rating, review),
     onSuccess: () => {
       toast.success("Review updated successfully!");
       queryClient.invalidateQueries({ queryKey: ["reviews"] });

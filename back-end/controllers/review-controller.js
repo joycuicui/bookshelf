@@ -22,8 +22,8 @@ const getAllReviews = async (req, res, next) => {
 const editReview = async (req, res, next) => {
   try {
     const { reviewId } = req.params;
-    const { review } = req.body;
-    const updatedReview = await updateReview(reviewId, review);
+    const { rating, review } = req.body;
+    const updatedReview = await updateReview(reviewId, rating, review);
     if (!updatedReview) {
       const error = new Error();
       error.message = "Review not found";

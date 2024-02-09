@@ -26,16 +26,16 @@ const getReviewsByUserId = async (userId) => {
   }
 };
 
-const updateReview = async (reviewId, review) => {
+const updateReview = async (reviewId, rating, review) => {
   try {
     const res = await db.query(
       `
       UPDATE reviews
-      SET user_review = $1
-      WHERE id = $2
+      SET user_review = $1, rating = $2
+      WHERE id = $3
       RETURNING *;
       `,
-      [review, reviewId]
+      [review, rating, reviewId]
     );
     const updatedReview = res.rows[0];
     return updatedReview;
