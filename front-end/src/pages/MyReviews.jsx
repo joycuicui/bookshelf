@@ -52,7 +52,7 @@ const MyReviews = () => {
             onClick={handleOpenAddModal}
             className="font-semibold text-gray-700  bg-emerald-300 hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-emerald-200 rounded-lg px-5 py-2.5 text-center inline-flex items-center"
           >
-            Write a New Review<span className="text-xl ml-2">+</span>
+            <span className="text-xl mr-2">+</span>Write a New Review
             <span className="ml-2">
               {/* <HiChevronDown className="text-lg" /> */}
             </span>
@@ -117,7 +117,7 @@ const MyReviewCard = ({ book }) => {
   };
 
   return (
-    <div className="mx-12 mt-8 p-3 flex flex-col gap-3 border border-gray-300 rounded-lg shadow max-w-[46rem] h-[26rem] overflow-auto">
+    <div className="mx-12 mt-8 p-3 flex flex-col gap-3 border border-gray-300 rounded-lg shadow w-[46rem] h-[26rem] overflow-auto">
       <div className="flex justify-between gap-8">
         <img
           // src="/default-cover-image.png"
@@ -149,13 +149,13 @@ const MyReviewCard = ({ book }) => {
         </div>
       </div>
       <div className="border-t-[1px] p-3 mb-0 pb-0">
-        {review.length <= REVIEW_LIMIT ? (
+        {review === null || review?.length <= REVIEW_LIMIT ? (
           <p>{review}</p>
         ) : showFullReview ? (
           <p>{review}</p>
         ) : (
           <p>
-            {review.slice(0, REVIEW_LIMIT)}
+            {review?.slice(0, REVIEW_LIMIT)}
             <span className="text-emerald-700 font-semibold">. . .</span>
           </p>
         )}
@@ -163,7 +163,8 @@ const MyReviewCard = ({ book }) => {
           onClick={toggleShowFullReview}
           className="text-emerald-600 hover:underline mt-2"
         >
-          {review.length <= REVIEW_LIMIT ? null : showFullReview ? (
+          {review === null ||
+          review?.length <= REVIEW_LIMIT ? null : showFullReview ? (
             <>
               Show Less <HiArrowSmallUp className="inline text-lg" />
             </>
