@@ -64,17 +64,17 @@ const EditReview = ({ book, onCloseModal }) => {
           className="p-2 border border-gray-300 shadow-sm rounded-sm w-full h-64"
         />
       </div>
-      <div>
+      <div className="flex justify-end gap-3">
         <button
           onClick={onCloseModal}
           type="reset"
-          className="gray-600 bg-white border rounded-sm shadow-sm border-gray-200 hover:bg-gray-50"
+          className="px-5 py-2 text-gray-600 bg-white border rounded-lg shadow-sm border-gray-200 hover:bg-gray-50"
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="gray-600 bg-white border rounded-sm shadow-sm border-gray-200 hover:bg-gray-50"
+          className="px-5 py-2 text-gray-600 bg-white border rounded-lg shadow-sm border-gray-200 hover:bg-emerald-200"
         >
           Edit Review
         </button>
