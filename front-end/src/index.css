@@ -70,3 +70,21 @@ progress[value]::-moz-progress-bar {
   -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 10px), #000 0);
   animation: rotate 1.5s infinite linear;
 }
+
+/* Change the color of the arrows */
+.slick-prev:before,
+.slick-next:before {
+  color: green; /* Change to the desired color */
+}
+
+/* Remove background color from arrows */
+.slick-prev,
+.slick-next {
+  background-color: transparent;
+}
+
+/* Adjust the size of the arrows */
+.slick-prev:before,
+.slick-next:before {
+  font-size: 24px; /* Change to the desired font size */
+}
