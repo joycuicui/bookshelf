@@ -31,6 +31,10 @@ const EditReview = ({ book, onCloseModal }) => {
     onCloseModal();
   };
 
+  const handleImageError = (e) => {
+    e.target.src = "/default-cover-image.png";
+  };
+
   return (
     <form
       onSubmit={handleSubmitEditReview}
@@ -38,8 +42,8 @@ const EditReview = ({ book, onCloseModal }) => {
     >
       <div className="flex justify-between gap-8">
         <img
-          // src="/default-cover-image.png"
           src={cover_image}
+          onError={handleImageError}
           alt="Book Cover"
           className="w-28 h-40 rounded-sm border"
         />

@@ -61,12 +61,17 @@ const BookCarousel = ({ book, onCloseModal, addReview }) => {
     onCloseModal();
   };
 
+  const handleImageError = (e) => {
+    e.target.src = "/default-cover-image.png";
+  };
+
   return (
     <form onSubmit={handleSubmitNewReview}>
       <div className="px-4">
         <div className="flex justify-between gap-8">
           <img
             src={cover_image}
+            onError={handleImageError}
             alt="Book Cover"
             className="w-28 h-40 rounded-sm border"
           />

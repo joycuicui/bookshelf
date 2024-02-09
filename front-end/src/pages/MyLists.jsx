@@ -111,7 +111,6 @@ const MyBookCard = ({ book }) => {
     author,
     cover_image,
   } = book;
-  // console.log(readingListId, bookId);
 
   const handleMouseEnter = () => {
     setShowButtons(true);
@@ -126,6 +125,10 @@ const MyBookCard = ({ book }) => {
     moveToList({ listId: selectedListId, bookId });
   };
 
+  const handleImageError = (e) => {
+    e.target.src = "/default-cover-image.png";
+  };
+
   return (
     <div
       onMouseEnter={handleMouseEnter}
@@ -133,8 +136,8 @@ const MyBookCard = ({ book }) => {
       className="mx-12 mt-10 border border-gray-300 rounded-lg shadow max-w-56"
     >
       <img
-        // src={`/${cover_image}`}
         src={cover_image}
+        onError={handleImageError}
         alt="Book Cover"
         className="w-60 h-96 rounded-t-lg object-cover"
       />

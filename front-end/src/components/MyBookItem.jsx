@@ -13,7 +13,6 @@ const MyBookItem = ({ book }) => {
     author,
     cover_image,
   } = book;
-  // const { title, author, cover_image } = book;
 
   const { isUpdating, updateProgress } = useUpdateProgress();
   const { isMoving, moveToList } = useMoveToList();
@@ -22,7 +21,6 @@ const MyBookItem = ({ book }) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const [inputValue, setInputValue] = useState(0);
-  // const [totalPages, setTotalPages] = useState(500);
 
   const progressPercentage = ((currentPage / totalPages) * 100).toFixed(2);
 
@@ -64,11 +62,15 @@ const MyBookItem = ({ book }) => {
     moveToList({ listId: 3, bookId });
   };
 
+  const handleImageError = (e) => {
+    e.target.src = "/default-cover-image.png";
+  };
+
   return (
     <div className="mx-12 mt-8 flex gap-16 border border-gray-300 rounded-lg shadow justify-between">
       <img
-        // src={`/${cover_image}`}
         src={cover_image}
+        onError={handleImageError}
         alt="Book Cover"
         className="w-56 rounded-l-lg"
       />

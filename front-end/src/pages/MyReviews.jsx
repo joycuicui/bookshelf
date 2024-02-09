@@ -116,12 +116,16 @@ const MyReviewCard = ({ book }) => {
     setEditModalOpen(false);
   };
 
+  const handleImageError = (e) => {
+    e.target.src = "/default-cover-image.png";
+  };
+
   return (
     <div className="mx-12 mt-8 p-3 flex flex-col gap-3 border border-gray-300 rounded-lg shadow w-[46rem] h-[26rem] overflow-auto">
       <div className="flex justify-between gap-8">
         <img
-          // src="/default-cover-image.png"
           src={cover_image}
+          onError={handleImageError}
           alt="Book Cover"
           className="w-28 h-40 rounded-sm ml-3"
         />
