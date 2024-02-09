@@ -5,6 +5,8 @@ import SortBy from "../components/SortBy";
 import StarRating from "../components/StarRating";
 import { useReviews } from "../query/useReviews";
 import { useState } from "react";
+import { useEditReview } from "../query/useEditReview";
+import { useDeleteReview } from "../query/useDeleteReview";
 
 const MyReviews = () => {
   const { isLoading, reviews } = useReviews();
@@ -52,9 +54,12 @@ const MyReviews = () => {
 
 export default MyReviews;
 
+const REVIEW_LIMIT = 540;
+
 const MyReviewCard = ({ book }) => {
+  const { isDeleting, deleteReview } = useDeleteReview();
   const {
-    book_id: bookId,
+    id: reviewId,
     title,
     author,
     cover_image,
@@ -63,21 +68,25 @@ const MyReviewCard = ({ book }) => {
     rating,
   } = book;
   // console.log(review.length);
-
+  const { isEditing, editReview } = useEditReview();
   const [showFullReview, setShowFullReview] = useState(false);
 
   const toggleShowFullReview = () => {
     setShowFullReview(!showFullReview);
   };
 
+  const handleEditReview = () => {
+    console.log("Edit review");
+  };
+
   return (
     <div className="mx-12 mt-8 p-3 flex flex-col gap-3 border border-gray-300 rounded-lg shadow max-w-[46rem] h-[26rem] overflow-auto">
       <div className="flex justify-between gap-8">
         <img
-          src="/default-cover-image.png"
-          // src={cover_image}
+          // src="/default-cover-image.png"
+          src={cover_image}
           alt="Book Cover"
-          className="w-28 h-40 rounded-sm"
+          className="w-28 h-40 rounded-sm ml-3"
         />
         <div className="flex flex-col gap-2 flex-grow">
           <p className="text-gray-700 font-semibold text-xl pt-2 truncate">
@@ -88,16 +97,28 @@ const MyReviewCard = ({ book }) => {
           <StarRating ratedRating={rating} />
         </div>
         <div className="flex gap-3 items-start m-3">
-          <button className="hover:underline text-emerald-600">EDIT</button>
-          <button className="hover:underline text-red-600">DELETE</button>
+          <button
+            onClick={handleEditReview}
+            className="hover:underline text-emerald-600"
+          >
+            EDIT
+          </button>
+          <button
+            onClick={() => deleteReview({ reviewId })}
+            className="hover:underline text-red-600"
+          >
+            DELETE
+          </button>
         </div>
       </div>
       <div className="border-t-[1px] p-3 mb-0 pb-0">
-        {showFullReview ? (
+        {review.length <= REVIEW_LIMIT ? (
+          <p>{review}</p>
+        ) : showFullReview ? (
           <p>{review}</p>
         ) : (
           <p>
-            {review.slice(0, 540)}{" "}
+            {review.slice(0, REVIEW_LIMIT)}
             <span className="text-emerald-700 font-semibold">. . .</span>
           </p>
         )}
@@ -105,7 +126,7 @@ const MyReviewCard = ({ book }) => {
           onClick={toggleShowFullReview}
           className="text-emerald-600 hover:underline mt-2"
         >
-          {showFullReview ? (
+          {review.length <= REVIEW_LIMIT ? null : showFullReview ? (
             <>
               Show Less <HiArrowSmallUp className="inline text-lg" />
             </>
