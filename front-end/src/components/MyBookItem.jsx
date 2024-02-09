@@ -12,6 +12,7 @@ const MyBookItem = ({ book }) => {
     title,
     author,
     cover_image,
+    first_published,
   } = book;
 
   const { isUpdating, updateProgress } = useUpdateProgress();
@@ -76,9 +77,10 @@ const MyBookItem = ({ book }) => {
       />
       <div className="flex flex-col gap-2 pt-3 flex-grow">
         <p className="text-gray-700 font-semibold text-xl pt-2">{title}</p>
-        <p>by {author}</p>
+        <p className="italic">by {author}</p>
+        <p>First Published: {first_published}</p>
         <div className="mt-2 flex flex-col gap-3 items-start">
-          <label className="flex items-center">
+          <label className="flex items-center mt-3">
             <progress max="100" value={progressPercentage}></progress>
             <div className="text-xl font-semibold block ml-5 text-gray-700">
               <span>{currentPage}/</span>

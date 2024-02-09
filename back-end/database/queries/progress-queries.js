@@ -11,6 +11,7 @@ const getProgressByUserId = async (userId) => {
       books.id AS book_id,
       books.title AS title,
       books.cover_image_medium AS cover_image,
+      books.published_year AS first_published,
       authors.name AS author
       FROM reading_progress
       JOIN users ON reading_progress.user_id = users.id
