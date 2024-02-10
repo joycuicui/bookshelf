@@ -3,6 +3,7 @@ import { HiMiniCheckCircle, HiChevronDown } from "react-icons/hi2";
 
 import { useUpdateProgress } from "../query/useUpdateProgress";
 import { useMoveToList } from "../query/useMoveToList";
+import { useSendEmail } from "../query/useSendEmail";
 
 const MyBookItem = ({ book }) => {
   const {
@@ -17,10 +18,10 @@ const MyBookItem = ({ book }) => {
 
   const { isUpdating, updateProgress } = useUpdateProgress();
   const { isMoving, moveToList } = useMoveToList();
+  const { isSending, sendEmail } = useSendEmail();
 
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-
   const [inputValue, setInputValue] = useState(0);
 
   const progressPercentage = ((currentPage / totalPages) * 100).toFixed(2);
@@ -39,7 +40,10 @@ const MyBookItem = ({ book }) => {
   };
 
   const handleEmailReminder = () => {
-    console.log("Setting Reading Goal");
+    sendEmail({
+      subject: "Your Reading Reminder From BookHaven 🚀",
+      text: "This is a email reminder for you to keep reading your book!",
+    });
   };
 
   const handleDropdown = () => {
