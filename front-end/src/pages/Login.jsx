@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import toast from "react-hot-toast";
-
+import ReadingSvg2 from "../assets/reading2.svg";
 import {
   loginStart,
   loginSuccess,
@@ -65,6 +65,11 @@ const Login = () => {
 
   return (
     <div onSubmit={handleSubmit} className="p-3 max-w-lg mx-auto">
+      <img
+        src={ReadingSvg2}
+        alt="Reading Books"
+        className="w-56 mx-auto mt-3"
+      />
       <h1 className="text-3xl text-center font-semibold my-7 text-emerald-950">
         Log In
       </h1>

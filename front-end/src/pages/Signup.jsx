@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import ReadingSvg1 from "../assets/reading1.svg";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -47,6 +48,11 @@ const Signup = () => {
 
   return (
     <div onSubmit={handleSubmit} className="p-3 max-w-lg mx-auto">
+      <img
+        src={ReadingSvg1}
+        alt="Reading Books"
+        className="w-72 mx-auto mt-4"
+      />
       <h1 className="text-3xl text-center font-semibold my-7 text-emerald-950">
         Sign Up
       </h1>
