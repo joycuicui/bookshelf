@@ -7,7 +7,7 @@ const Modal = ({ children, onCloseModal }) => {
       {/* modal */}
       <div className="fixed top-1/2 left-1/2 bg-white transform -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-lg p-10 transition-all duration-500">
         <button className="bg-none border-none p-1 rounded-md transform translate-x-2 hover:bg-gray-200 absolute top-4 right-8 transition-all duration-200">
-          <HiXMark onClick={onCloseModal} className="text-2xl" />
+          <HiXMark onClick={onCloseModal} className="text-xl" />
         </button>
         <div>{children}</div>
       </div>

@@ -51,12 +51,12 @@ const Signup = () => {
       <img
         src={ReadingSvg1}
         alt="Reading Books"
-        className="w-72 mx-auto mt-4"
+        className="w-56 mx-auto mt-4"
       />
-      <h1 className="text-3xl text-center font-semibold my-7 text-emerald-950">
+      <h1 className="text-2xl text-center font-semibold my-7 text-gray-700">
         Sign Up
       </h1>
-      <form className="flex flex-col gap-5">
+      <form className="flex flex-col gap-4">
         <div className="relative">
           <input
             onChange={handleChange}
@@ -64,11 +64,11 @@ const Signup = () => {
             id="name"
             placeholder=" "
             required
-            className="block p-3 pt-4 w-full text-sm text-gray-900 bg-transparent border-2 border-gray-500 rounded-xl appearance-none focus:outline-none focus:ring-0 focus:border-emerald-600 peer"
+            className="block p-2 pt-3 w-full text-xs text-gray-900 bg-transparent border-2 border-gray-500 rounded-xl appearance-none focus:outline-none focus:ring-0 focus:border-emerald-600 peer"
           />
           <label
             htmlFor="name"
-            className="absolute text-base text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-emerald-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+            className="absolute text-xs text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-emerald-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
           >
             Name
           </label>
@@ -81,11 +81,11 @@ const Signup = () => {
             id="email"
             placeholder=" "
             required
-            className="block p-3 pt-4 w-full text-sm text-gray-900 bg-transparent border-2 border-gray-500 rounded-xl appearance-none focus:outline-none focus:ring-0 focus:border-emerald-600 peer"
+            className="block p-2 pt-3 w-full text-xs text-gray-900 bg-transparent border-2 border-gray-500 rounded-xl appearance-none focus:outline-none focus:ring-0 focus:border-emerald-600 peer"
           />
           <label
             htmlFor="email"
-            className="absolute text-base text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-emerald-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+            className="absolute text-xs text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-emerald-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
           >
             Email
           </label>
@@ -97,11 +97,11 @@ const Signup = () => {
             id="password"
             placeholder=" "
             required
-            className="block p-3 pt-4 w-full text-sm text-gray-900 bg-transparent border-2 border-gray-500 rounded-xl appearance-none focus:outline-none focus:ring-0 focus:border-emerald-600 peer"
+            className="block p-2 pt-3 w-full text-xs text-gray-900 bg-transparent border-2 border-gray-500 rounded-xl appearance-none focus:outline-none focus:ring-0 focus:border-emerald-600 peer"
           />
           <label
             htmlFor="password"
-            className="absolute text-base text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-emerald-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+            className="absolute text-xs text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-emerald-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
           >
             Password
           </label>
@@ -109,12 +109,12 @@ const Signup = () => {
 
         <button
           disabled={loading}
-          className="button-effect tracking-wider mt-2 bg-emerald-700 text-white p-3 rounded-xl uppercase disabled:opacity-80 disabled:cursor-wait"
+          className="text-sm button-effect tracking-wider mt-2 bg-emerald-700 text-white p-2 rounded-xl uppercase disabled:opacity-80 disabled:cursor-wait"
         >
           {loading ? "loading..." : "sign up"}
         </button>
       </form>
-      <div className="flex gap-2 mt-7">
+      <div className="flex gap-2 mt-7 text-sm">
         <p>Have an account?</p>
         <Link to="/login" className="text-slate-700">
           <span className="text-blue-700 underline">Log In</span>

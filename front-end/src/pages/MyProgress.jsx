@@ -38,7 +38,7 @@ const MyProgress = () => {
   return (
     <div>
       <div className="flex justify-between">
-        <h1 className="text-gray-600 font-semibold text-2xl">My Progress</h1>
+        <h1 className="text-gray-600 font-semibold text-xl">My Progress</h1>
         <SortBy
           options={[
             { value: "title-asc", label: "Sort by title (A-Z)" },

@@ -38,7 +38,7 @@ const MyBookItem = ({ book }) => {
     setShowUpdateForm((prev) => !prev);
   };
 
-  const handleSetReadingGoal = () => {
+  const handleEmailReminder = () => {
     console.log("Setting Reading Goal");
   };
 
@@ -68,31 +68,31 @@ const MyBookItem = ({ book }) => {
   };
 
   return (
-    <div className="mx-12 mt-8 flex gap-16 border border-gray-300 rounded-lg shadow justify-between">
+    <div className="mx-12 my-8 flex gap-16 border border-gray-300 rounded-lg shadow justify-between">
       <img
         src={cover_image}
         onError={handleImageError}
         alt="Book Cover"
-        className="w-56 rounded-l-lg"
+        className="w-42 rounded-l-lg"
       />
-      <div className="flex flex-col gap-2 pt-3 flex-grow">
-        <p className="text-gray-700 font-semibold text-xl pt-2">{title}</p>
-        <p className="italic">by {author}</p>
-        <p>First Published: {first_published}</p>
-        <div className="mt-2 flex flex-col gap-3 items-start">
-          <label className="flex items-center mt-3">
+      <div className="flex flex-col gap-2 pt-2 flex-grow">
+        <p className="text-gray-700 font-semibold text-lg pt-2">{title}</p>
+        <p className="italic text-sm">by {author}</p>
+        <p className="text-sm">First Published: {first_published}</p>
+        <div className="mt-1 flex flex-col gap-3 items-start">
+          <label className="flex items-center mt-2">
             <progress max="100" value={progressPercentage}></progress>
-            <div className="text-xl font-semibold block ml-5 text-gray-700">
+            <div className="text-base font-semibold block ml-5 text-gray-700">
               <span>{currentPage}/</span>
               <span>{totalPages}</span>
               <span className="ml-3">({progressPercentage}%</span>
               <span className="ml-2">{emoji})</span>
             </div>
           </label>
-          <div className="flex gap-3">
+          <div className="flex gap-3 text-sm">
             <button
               onClick={toggleUpdateProgressFrom}
-              className="button-effect tracking-wider mt-3 bg-emerald-700 text-white p-3 px-5 rounded-full disabled:opacity-80 disabled:cursor-wait"
+              className="button-effect tracking-wider mt-2 bg-emerald-700 text-white p-2.5 px-4 rounded-full disabled:opacity-80 disabled:cursor-wait"
             >
               Update Progress
             </button>
@@ -110,16 +110,16 @@ const MyBookItem = ({ book }) => {
                 />
                 <span>of {totalPages}</span>
                 <button type="submit">
-                  <HiMiniCheckCircle className="text-emerald-600 mr-2 text-3xl cursor-pointer" />
+                  <HiMiniCheckCircle className="text-emerald-600 mr-2 text-2xl cursor-pointer" />
                 </button>
               </form>
             )}
           </div>
         </div>
-        <div className="mt-2">
+        <div className="mt-2 text-sm">
           <button
-            onClick={handleSetReadingGoal}
-            className="button-effect tracking-wider mt-2 bg-amber-700 text-white p-3 px-5 rounded-full disabled:opacity-80 disabled:cursor-wait"
+            onClick={handleEmailReminder}
+            className="button-effect tracking-wider bg-amber-700 text-white p-2.5 px-4 rounded-full disabled:opacity-80 disabled:cursor-wait"
           >
             Email Reminder
           </button>
@@ -130,11 +130,11 @@ const MyBookItem = ({ book }) => {
         <button
           onClick={handleDropdown}
           type="button"
-          className="text-gray bg-emerald-300 hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-emerald-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
+          className="text-gray bg-emerald-300 hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-emerald-200 font-medium rounded-lg text-xs px-4 py-2 text-center inline-flex items-center"
         >
           Move to list
           <span className="ml-2">
-            <HiChevronDown className="text-lg" />
+            <HiChevronDown />
           </span>
         </button>
         <div
@@ -144,7 +144,7 @@ const MyBookItem = ({ book }) => {
           } z-10 bg-white rounded-lg shadow`}
         >
           {showDropdown && (
-            <ul className="py-2 text-sm text-gray-700">
+            <ul className="py-2 text-xs text-gray-700">
               <li
                 onClick={handleMoveToWant}
                 className="block px-4 py-2 hover:bg-gray-100 cursor-pointer"

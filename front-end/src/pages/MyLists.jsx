@@ -44,7 +44,7 @@ const MyLists = () => {
   return (
     <div>
       <div className="flex justify-between">
-        <h1 className="text-gray-600 font-semibold text-2xl">
+        <h1 className="text-gray-600 font-semibold text-xl">
           My Reading Lists
         </h1>
         <div className="flex gap-2">
@@ -133,26 +133,32 @@ const MyBookCard = ({ book }) => {
     <div
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="mx-12 mt-10 pb-2 border border-gray-300 rounded-lg shadow max-w-56"
+      className="mx-12 mt-10 pb-2 border border-gray-300 rounded-lg shadow max-w-52"
     >
       <img
         src={cover_image}
         onError={handleImageError}
         alt="Book Cover"
-        className="w-60 h-96 rounded-t-lg object-cover"
+        className="w-56 h-[19rem] rounded-t-lg object-cover"
       />
       <div className="px-2">
-        <p className="text-gray-700 font-semibold pt-2 truncate">{title}</p>
-        {showButtons ? "" : <p className="italic truncate pt-1">by {author}</p>}
+        <p className="truncate text-gray-700 font-semibold pt-2 text-sm">
+          {title}
+        </p>
+        {showButtons ? (
+          ""
+        ) : (
+          <p className="italic truncate pt-1 text-xs">by {author}</p>
+        )}
       </div>
       <div
-        className={`flex justify-between text-sm pt-1 ${
+        className={`flex justify-between text-xs ${
           showButtons ? "block" : "hidden"
         }`}
       >
         <button
           onClick={() => removeBook({ listId: readingListId, bookId })}
-          className="pl-2 text-red-600"
+          className="px-2 text-red-600"
         >
           Remove
         </button>

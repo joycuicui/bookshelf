@@ -27,7 +27,7 @@ progress[value] {
   --color: linear-gradient(90deg, #fbbf24, #84cc16) 0 / var(--w);
   /* the background color */
   --background: lightgrey;
-  height: 25px;
+  height: 20px;
 
   -webkit-appearance: none;
   -moz-appearance: none;

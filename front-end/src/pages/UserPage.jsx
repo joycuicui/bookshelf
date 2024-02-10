@@ -5,7 +5,7 @@ const UserPage = () => {
   return (
     <main className="flex">
       <Sidebar />
-      <article className="ml-64 bg-gray-50 p-8 flex-grow min-h-screen">
+      <article className="ml-48 bg-gray-50 p-6 flex-grow min-h-screen">
         <Outlet />
       </article>
     </main>

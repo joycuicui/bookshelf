@@ -38,7 +38,7 @@ const EditReview = ({ book, onCloseModal }) => {
   return (
     <form
       onSubmit={handleSubmitEditReview}
-      className="overflow-hidden w-[800px] flex flex-col p-6 gap-6"
+      className="overflow-hidden w-[650px] flex flex-col p-6 gap-4"
     >
       <div className="flex justify-between gap-8">
         <img
@@ -48,11 +48,11 @@ const EditReview = ({ book, onCloseModal }) => {
           className="w-28 h-40 rounded-sm border"
         />
         <div className="flex flex-col gap-2 flex-grow">
-          <p className="text-gray-700 font-semibold text-xl pt-2 truncate">
+          <p className="text-gray-700 font-semibold text-lg pt-2 truncate">
             {title}
           </p>
-          <p className="italic">by {author}</p>
-          <div>First Published: {first_published}</div>
+          <p className="italic text-sm">by {author}</p>
+          <div className="text-sm">First Published: {first_published}</div>
           <StarRating
             ratedRating={rating}
             isEditing={true}
@@ -65,20 +65,20 @@ const EditReview = ({ book, onCloseModal }) => {
           type="text"
           onChange={handleReviewChange}
           defaultValue={review}
-          className="p-2 border border-gray-300 shadow-sm rounded-sm w-full h-64"
+          className="text-[13px] p-2 border border-gray-300 shadow-sm rounded-sm w-full h-52"
         />
       </div>
       <div className="flex justify-end gap-3">
         <button
           onClick={onCloseModal}
           type="reset"
-          className="px-5 py-2 text-gray-600 bg-white border rounded-lg shadow-sm border-gray-200 hover:bg-gray-50"
+          className="text-sm px-4 py-1 text-gray-600 bg-white border rounded-lg shadow-sm border-gray-200 hover:bg-gray-50"
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="px-5 py-2 text-gray-600 bg-white border rounded-lg shadow-sm border-gray-200 hover:bg-emerald-200"
+          className="text-sm px-4 py-1 text-gray-600 bg-white border rounded-lg shadow-sm border-gray-200 hover:bg-emerald-200"
         >
           Edit Review
         </button>

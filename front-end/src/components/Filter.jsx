@@ -15,7 +15,7 @@ const Filter = ({ filterField, options }) => {
       key={option.value}
       className={`${
         currentFilter === option.value && "bg-emerald-300"
-      } py-2 px-4 rounded-md font-semibold transition duration-300 
+      } text-xs py-1.5 px-2 rounded-md font-semibold transition duration-300 
        text-gray-700 hover:bg-emerald-300 `}
     >
       {option.label}

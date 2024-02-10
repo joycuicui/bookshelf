@@ -13,7 +13,7 @@ const SortBy = ({ options }) => {
     <select
       value={sortBy}
       onChange={handleChange}
-      className="border py-2 px-4 rounded-md font-semibold transition duration-300 
+      className="text-xs border py-1 px-2 rounded-md font-semibold transition duration-300 
       text-gray-700 cursor-pointer"
     >
       {options.map((option) => (

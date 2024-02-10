@@ -10,7 +10,7 @@ const AddReview = ({ books, onCloseModal }) => {
   const { isAdding, addReview } = useAddReview();
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -18,7 +18,7 @@ const AddReview = ({ books, onCloseModal }) => {
   };
 
   return (
-    <div className="overflow-hidden w-[800px] flex flex-col p-10 gap-6">
+    <div className="overflow-hidden w-[650px] flex flex-col px-8 gap-6">
       <Slider {...settings}>
         {books.map((book) => (
           <BookCarousel
@@ -67,7 +67,7 @@ const BookCarousel = ({ book, onCloseModal, addReview }) => {
 
   return (
     <form onSubmit={handleSubmitNewReview}>
-      <div className="px-4">
+      <div className="px-2">
         <div className="flex justify-between gap-8">
           <img
             src={cover_image}
@@ -76,11 +76,11 @@ const BookCarousel = ({ book, onCloseModal, addReview }) => {
             className="w-28 h-40 rounded-sm border"
           />
           <div className="flex flex-col gap-2 flex-grow">
-            <p className="text-gray-700 font-semibold text-xl pt-2 truncate">
+            <p className="text-gray-700 font-semibold text-lg pt-2 truncate">
               {title}
             </p>
-            <p className="italic">by {author}</p>
-            <div>First Published: {first_published}</div>
+            <p className="italic text-sm">by {author}</p>
+            <div className="text-sm">First Published: {first_published}</div>
             <StarRating
               ratedRating={0}
               isEditing={true}
@@ -93,21 +93,21 @@ const BookCarousel = ({ book, onCloseModal, addReview }) => {
             type="text"
             onChange={handleNewReview}
             placeholder="Write your review here..."
-            className="mt-3 p-2 border border-gray-300 shadow-sm rounded-sm w-full h-64"
+            className="text-[13px] mt-3 p-2 border border-gray-300 shadow-sm rounded-sm w-full h-60"
           />
         </div>
       </div>
-      <div className="flex justify-end gap-3 my-5">
+      <div className="flex justify-end gap-3 mt-3">
         <button
           onClick={onCloseModal}
           type="reset"
-          className="px-5 py-2 text-gray-600 bg-white border rounded-lg shadow-sm border-gray-200 hover:bg-gray-50"
+          className="text-sm px-4 py-1 text-gray-600 bg-white border rounded-lg shadow-sm border-gray-200 hover:bg-gray-50"
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="px-5 py-2 text-gray-600 bg-white border rounded-lg shadow-sm border-gray-200 hover:bg-emerald-200"
+          className="text-sm px-4 py-1 text-gray-600 bg-white border rounded-lg shadow-sm border-gray-200 hover:bg-emerald-200"
         >
           Add Review
         </button>

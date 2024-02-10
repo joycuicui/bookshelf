@@ -46,16 +46,14 @@ const MyReviews = () => {
   return (
     <div>
       <div className="flex justify-between">
-        <h1 className="text-gray-600 font-semibold text-2xl">My Reviews</h1>
+        <h1 className="text-gray-600 font-semibold text-xl">My Reviews</h1>
         <div className="flex gap-2">
           <button
             onClick={handleOpenAddModal}
             className="font-semibold text-gray-700  bg-emerald-300 hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-emerald-200 rounded-lg px-5 py-2.5 text-center inline-flex items-center"
           >
-            <span className="text-xl mr-2">+</span>Write a New Review
-            <span className="ml-2">
-              {/* <HiChevronDown className="text-lg" /> */}
-            </span>
+            <span className="text-xs mr-2">+</span>
+            <span className="text-xs">Write a New Review</span>
           </button>
           <SortBy
             options={[
@@ -121,32 +119,32 @@ const MyReviewCard = ({ book }) => {
   };
 
   return (
-    <div className="mx-12 mt-8 p-3 flex flex-col gap-3 border border-gray-300 rounded-lg shadow w-[46rem] h-[26rem] overflow-auto">
-      <div className="flex justify-between gap-8">
+    <div className="mx-10 mt-7 p-2 flex flex-col gap-2 border border-gray-300 rounded-lg shadow w-[37rem] h-[21rem] overflow-auto">
+      <div className="flex justify-between pt-1">
         <img
           src={cover_image}
           onError={handleImageError}
           alt="Book Cover"
-          className="w-28 h-40 rounded-sm ml-3"
+          className="w-24 h-32 rounded-sm mx-4"
         />
         <div className="flex flex-col gap-2 flex-grow">
-          <p className="text-gray-700 font-semibold text-xl pt-2 truncate">
+          <p className="text-gray-700 font-semibold text-base pt-2 truncate">
             {title}
           </p>
-          <p className="italic">by {author}</p>
-          <div>First Published: {first_published}</div>
+          <p className="italic text-sm">by {author}</p>
+          <div className="text-sm">First Published: {first_published}</div>
           <StarRating ratedRating={rating} />
         </div>
-        <div className="flex gap-3 items-start m-3">
+        <div className="flex gap-2 items-start m-2">
           <button
             onClick={handleOpenEditModal}
-            className="hover:underline text-emerald-600"
+            className="hover:underline text-emerald-600 text-sm"
           >
             EDIT
           </button>
           <button
             onClick={() => deleteReview({ reviewId })}
-            className="hover:underline text-red-600"
+            className="hover:underline text-red-600 text-sm"
           >
             DELETE
           </button>
@@ -154,27 +152,29 @@ const MyReviewCard = ({ book }) => {
       </div>
       <div className="border-t-[1px] p-3 mb-0 pb-0">
         {review === null || review?.length <= REVIEW_LIMIT ? (
-          <p>{review}</p>
+          <p className="text-[13px]">{review}</p>
         ) : showFullReview ? (
-          <p>{review}</p>
+          <p className="text-[13px]">{review}</p>
         ) : (
-          <p>
+          <p className="text-[13px]">
             {review?.slice(0, REVIEW_LIMIT)}
             <span className="text-emerald-700 font-semibold">. . .</span>
           </p>
         )}
         <button
           onClick={toggleShowFullReview}
-          className="text-emerald-600 hover:underline mt-2"
+          className="text-emerald-600 hover:underline mt-1"
         >
           {review === null ||
           review?.length <= REVIEW_LIMIT ? null : showFullReview ? (
             <>
-              Show Less <HiArrowSmallUp className="inline text-lg" />
+              <span className="text-[13px]">Show Less</span>
+              <HiArrowSmallUp className="inline" />
             </>
           ) : (
             <>
-              Show More <HiArrowSmallDown className="inline text-lg" />
+              <span className="text-[13px]">Show More</span>
+              <HiArrowSmallDown className="inline" />
             </>
           )}
         </button>

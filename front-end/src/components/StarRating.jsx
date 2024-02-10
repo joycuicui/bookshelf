@@ -39,11 +39,11 @@ export default function StarRating({ ratedRating, isEditing, onChange }) {
       </div>
 
       {isEditing ? (
-        <p className="text-yellow-500">
+        <p className="text-yellow-500 text-sm">
           {messages[tempRating ? tempRating - 1 : rating - 1]}
         </p>
       ) : (
-        <p className="text-yellow-500">{messages[ratedRating - 1]}</p>
+        <p className="text-yellow-500 text-sm">{messages[ratedRating - 1]}</p>
       )}
     </div>
   );
@@ -53,7 +53,7 @@ function Star({ onRate, full, onHoverIn, onHoverOut, isEditing }) {
   return (
     <span
       role="button"
-      className="w-9 h-9 cursor-pointer block"
+      className="w-7 h-7 cursor-pointer block"
       onClick={onRate}
       onMouseEnter={onHoverIn}
       onMouseLeave={onHoverOut}
