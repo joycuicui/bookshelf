@@ -91,7 +91,7 @@ const Header = (props) => {
               <li>
                 <Link to="/user/books" className="hover:underline">
                   <img
-                    src={`/${currentUser.avatar}`}
+                    src={currentUser.avatar}
                     alt="User Avatar"
                     className="button-effect rounded-full w-8 h-8"
                   />
