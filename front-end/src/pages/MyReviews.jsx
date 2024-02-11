@@ -122,7 +122,7 @@ const MyReviewCard = ({ book }) => {
     <div className="mx-10 mt-7 p-2 flex flex-col gap-2 border border-gray-300 rounded-lg shadow w-[37rem] h-[21rem] overflow-auto">
       <div className="flex justify-between pt-1">
         <img
-          src={cover_image}
+          src={cover_image ? cover_image : "/default-cover-image.png"}
           onError={handleImageError}
           alt="Book Cover"
           className="w-24 h-32 rounded-sm mx-4"
@@ -132,7 +132,9 @@ const MyReviewCard = ({ book }) => {
             {title}
           </p>
           <p className="italic text-sm">by {author}</p>
-          <div className="text-sm">First Published: {first_published}</div>
+          <div className="text-sm">
+            First Published: {first_published ? first_published : "n/a"}
+          </div>
           <StarRating ratedRating={rating} />
         </div>
         <div className="flex gap-2 items-start m-2">
