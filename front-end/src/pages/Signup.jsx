@@ -35,10 +35,7 @@ const Signup = () => {
       }
       setLoading(false);
       setError(null);
-      toast.success("Account created successfully");
-      setTimeout(() => {
-        return navigate("/login");
-      }, 2000);
+      navigate("/login");
     } catch (err) {
       setLoading(false);
       setError(err.message);
