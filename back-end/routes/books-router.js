@@ -1,8 +1,11 @@
 const express = require("express");
+const getRandomBooks = require("../database/queries/return-random-books.js");
+const verifyToken = require("../helpers/verifyUser");
+const { addNewBook } = require("../controllers/book-controller");
 
 const router = express.Router();
 
-const getRandomBooks = require("../database/queries/return-random-books.js")
+router.post("/:userId", verifyToken, addNewBook);
 
 router.get("/all", async (req, res) => {
   try {
@@ -13,4 +16,5 @@ router.get("/all", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
 module.exports = router;
