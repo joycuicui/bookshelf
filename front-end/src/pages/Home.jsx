@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -6,7 +8,7 @@ const Home = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await fetch('/api/books/all'); // Assuming '/api/books' is your endpoint to fetch all books
+        const response = await fetch('/api/books/all');
         if (!response.ok) {
           throw new Error('Failed to fetch books');
         }
@@ -22,7 +24,7 @@ const Home = () => {
     };
 
     fetchBooks();
-  }, []); // Empty dependency array ensures the effect runs only once when the component mounts
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -43,9 +45,9 @@ const Home = () => {
               <p className="text-gray-700 font-semibold pt-2">{book.title}</p>
               <p className="italic text-gray-500 text-xs">by {book.name} </p>
 
-            <button className = "mt-2 px-4 py-2 bg-emerald-600 text-white rounded hover:bg-emerald-300" >
-              View Book Details
-            </button>
+            <Link to={`/books/${book.id}`} className="mt-2 px-4 py-2 bg-emerald-600 text-white rounded hover:bg-emerald-300">
+                  View Book Details
+                </Link>
             </div>
           </div>
           ))}
