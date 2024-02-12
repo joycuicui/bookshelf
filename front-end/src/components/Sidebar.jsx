@@ -36,12 +36,12 @@ const Sidebar = () => {
             <span>My Profile</span>
           </NavLink>
         </li>
-        {/* <li className="p-3 pl-7 items-center text-gray-600 text-sm font-medium hover:bg-gray-100 hover:rounded-lg">
+        <li className="p-3 pl-7 items-center text-gray-600 text-sm font-medium hover:bg-gray-100 hover:rounded-lg">
           <NavLink to="/user/settings" className="flex gap-2">
             <HiOutlineCog8Tooth className="text-xl w-5 h-5 text-gray-400" />
             <span>Settings</span>
           </NavLink>
-        </li> */}
+        </li>
       </ul>
     </aside>
   );
