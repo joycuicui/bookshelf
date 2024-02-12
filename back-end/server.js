@@ -1,5 +1,6 @@
 // populate environment variables with values from the .env file
 require("dotenv").config();
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 // dependencies
 const express = require("express");
@@ -16,6 +17,18 @@ app.use(express.json());
 
 app.use(cookieParser());
 
+// // Proxy middleware for the Open Library API
+const openLibraryProxy = createProxyMiddleware({
+  target: 'https://openlibrary.org',
+  changeOrigin: true,
+  pathRewrite: {
+    '^/open-library': '',
+  },
+  });
+  
+  app.use("/open-library", openLibraryProxy);
+ 
+
 // routes
 // const userRouter = require("./routes/user-router");
 const authRouter = require("./routes/auth-router");
@@ -24,6 +37,7 @@ const progressRouter = require("./routes/progress-router");
 const reviewsRouter = require("./routes/reviews-router");
 const booksRouter = require("./routes/books-router");
 const emailRouter = require("./routes/emails-router");
+// const { createProxyMiddleware } = require("http-proxy-middleware");
 
 // app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
