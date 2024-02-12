@@ -40,10 +40,7 @@ const MyBookItem = ({ book }) => {
   };
 
   const handleEmailReminder = () => {
-    sendEmail({
-      subject: "Your Reading Reminder From BookHaven 🚀",
-      text: "This is a email reminder for you to keep reading your book!",
-    });
+    sendEmail({ title, percentage: progressPercentage });
   };
 
   const handleDropdown = () => {

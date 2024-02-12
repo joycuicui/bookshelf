@@ -3,13 +3,14 @@ const { getUserById } = require("../database/queries/user-queries");
 
 const sendEmailToUser = async (req, res, next) => {
   const { userId } = req.params;
-  const { subject, text } = req.body;
+  const { title, percentage } = req.body;
+  console.log(percentage);
 
-  const { email } = await getUserById(userId);
+  const { email, name } = await getUserById(userId);
 
   // send email
   try {
-    sendEmail({ email, subject, text });
+    sendEmail({ email, name, title, percentage });
     return res.status(200).json({
       success: true,
       message: "Email sent successfully",
