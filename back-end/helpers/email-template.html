@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Email</title>
+  </head>
+  <body
+    style="
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    "
+  >
+    <table
+      cellpadding="0"
+      cellspacing="0"
+      border="0"
+      bgcolor="#ffffff"
+      align="center"
+      width="600"
+      style="border-collapse: collapse; margin: auto"
+    >
+      <tr>
+        <td style="padding: 24px">
+          <p>Hello {{NAME}},</p>
+          <p>
+            This is a reminder for you to continue your reading on
+            {{BOOK_NAME}}. You've read {{PERCENTAGE}}% already 🎉. Keep it up!
+          </p>
+          <p>
+            <a
+              href="http://localhost:5173/user/books"
+              style="
+                text-decoration: none;
+                background-color: #059669;
+                font-size: 14px;
+                color: #ffffff;
+                padding: 10px 12px;
+                border-radius: 5px;
+              "
+              >Go view your progress</a
+            >
+          </p>
+          <p>Happy reading! 📚</p>
+        </td>
+      </tr>
+    </table>
+    <footer
+      style="clear: both; padding-top: 24px; text-align: center; width: 100%"
+    >
+      <table
+        role="presentation"
+        border="0"
+        cellpadding="0"
+        cellspacing="0"
+        style="
+          border-collapse: separate;
+          mso-table-lspace: 0pt;
+          mso-table-rspace: 0pt;
+          width: 100%;
+        "
+        width="100%"
+      >
+        <tr>
+          <td
+            style="
+              vertical-align: top;
+              color: #9a9ea6;
+              font-size: 16px;
+              text-align: center;
+            "
+            valign="top"
+            align="center"
+          >
+            Interested in finding new books to read?
+            <a
+              href="http://localhost:5173/"
+              style="
+                text-decoration: underline;
+                color: #9a9ea6;
+                font-size: 14px;
+                text-align: center;
+              "
+              >BookHaven</a
+            >.
+          </td>
+        </tr>
+      </table>
+    </footer>
+  </body>
+</html>
