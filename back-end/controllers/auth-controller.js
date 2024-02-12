@@ -70,4 +70,40 @@ const logout = async (req, res, next) => {
   }
 };
 
-module.exports = { signup, login, logout };
+const google = async (req, res, next) => {
+  const { email, name, avatar } = req.body;
+  try {
+    // check if user exists
+    const user = await getUserByEmail(email);
+    // if user exists, log in
+    if (user) {
+      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+      const { password, ...rest } = user;
+      res
+        .status(200)
+        .cookie("access_token", token, { httpOnly: true })
+        .json(rest);
+    } else {
+      // if user doesn't exist, create a new user
+      // create a random password for the user
+      const generatedPassword = Math.random().toString(36).slice(-8);
+      const hashedPassword = bcrypt.hashSync(generatedPassword, 10);
+      const newUser = await createUser({
+        name,
+        email,
+        password: hashedPassword,
+        avatar,
+      });
+      const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET);
+      const { password, ...rest } = newUser;
+      res
+        .status(200)
+        .cookie("access_token", token, { httpOnly: true })
+        .json(rest);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { signup, login, logout, google };
