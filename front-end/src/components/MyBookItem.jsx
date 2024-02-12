@@ -77,7 +77,7 @@ const MyBookItem = ({ book }) => {
         src={cover_image ? cover_image : "/default-cover-image.png"}
         onError={handleImageError}
         alt="Book Cover"
-        className="w-44 rounded-l-lg"
+        className="w-44 h-72 rounded-l-lg"
       />
       <div className="flex flex-col gap-2 pt-2 flex-grow">
         <p className="text-gray-700 font-semibold text-lg pt-2">{title}</p>

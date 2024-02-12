@@ -1,13 +1,65 @@
-import { useState } from "react";
-import { useAddBook } from "../query/useAddBook";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
+
+import { useAddBook } from "../query/useAddBook";
+import { app } from "../firebase";
 
 const AddBook = ({ onCloseModal }) => {
   const { isCreating, addBook } = useAddBook();
   const [formData, setFormData] = useState({});
+  const [imageFile, setImageFile] = useState(null);
+  const [imageFileUrl, setImageFileUrl] = useState(null);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageFile(e.target.files[0]);
+      setImageFileUrl(URL.createObjectURL(file));
+    }
+  };
+
+  const uploadImage = async () => {
+    const storage = getStorage(app);
+    const fileName = new Date().getTime() + imageFile.name;
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, imageFile);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      },
+      (error) => {
+        toast.error("Could not upload image. Please try again.");
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setImageFileUrl(downloadURL);
+          toast.success("Image uploaded successfully!");
+          setFormData({ ...formData, bookCover: downloadURL });
+        });
+      }
+    );
+  };
+
+  useEffect(() => {
+    if (imageFile) {
+      uploadImage(imageFile);
+    }
+  }, [imageFile]);
 
   const handleFormData = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
   };
 
   const handleAddNewBook = async (e) => {
@@ -81,7 +133,7 @@ const AddBook = ({ onCloseModal }) => {
       <div className="text-gray-800 grid grid-cols-4 items-center px-3 pb-4 border-b border-gray-100">
         <label>Book Cover</label>
         <input
-          onChange={handleFormData}
+          onChange={handleImageChange}
           type="file"
           accept="image/*"
           id="bookCover"
