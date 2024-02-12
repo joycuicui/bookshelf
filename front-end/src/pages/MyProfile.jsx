@@ -167,8 +167,8 @@ const MyProfile = () => {
             />
           </div>
 
-          <div className="flex justify-between items-center">
-            <div className="text-sm underline text-red-600">Delete Account</div>
+          <div className="flex justify-end items-center">
+            {/* <div className="text-sm underline text-red-600">Delete Account</div> */}
             <button
               type="submit"
               className="text-sm px-4 py-1 text-gray-600 bg-emerald-300 border rounded-lg shadow-sm border-gray-200 hover:bg-emerald-400"
