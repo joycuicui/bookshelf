@@ -16,6 +16,7 @@ import MyProgress from "./pages/MyProgress";
 import MyLists from "./pages/MyLists";
 import MyReviews from "./pages/MyReviews";
 import MySettings from "./pages/MySettings";
+import MyProfile from "./pages/MyProfile";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,6 +43,7 @@ const App = () => {
               <Route path="books" element={<MyProgress />} />
               <Route path="lists" element={<MyLists />} />
               <Route path="reviews" element={<MyReviews />} />
+              <Route path="profile" element={<MyProfile />} />
               <Route path="settings" element={<MySettings />} />
             </Route>
           </Route>
