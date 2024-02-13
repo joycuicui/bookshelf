@@ -56,7 +56,7 @@ const Login = () => {
       const formattedName = formatName(data.name);
       toast(`Welcome back, ${formattedName}!`, { icon: "🎉" });
       setTimeout(() => {
-        return navigate("/user/books");
+        return navigate("/user/lists");
       }, 2000);
     } catch (err) {
       dispatch(loginFailure(err.message));
