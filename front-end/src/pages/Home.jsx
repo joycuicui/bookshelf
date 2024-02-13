@@ -53,7 +53,7 @@ const Home = () => {
           <div className="text-gray-400 text-xs sm:text-sm">
             Embark on literary journeys with BookHaven. Explore diverse books,
             track your progress, and curate your personal virtual bookshelf.
-            Join today and let storytelling ignite your imagination
+            Join today and let storytelling ignite your imagination.
           </div>
           <span>
             <Link
