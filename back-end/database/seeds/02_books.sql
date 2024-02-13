@@ -8,4 +8,4 @@
 
 -- copy data from books_data.csv
 COPY books (title, description, cover_image_small, cover_image_medium, publisher, published_year,isbn,number_of_pages,external_id)
-FROM '/home/labber/bookhaven/back-end/bin/books_data.csv' DELIMITER ',' CSV HEADER;
+FROM '/Users/joy/lighthouse/bookshelf/back-end/bin/books_data.csv' DELIMITER ',' CSV HEADER;
