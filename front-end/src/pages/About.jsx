@@ -18,7 +18,7 @@ const About = () => {
               <a href="https://github.com/bahmed32" style={{ color: 'green' }}>GitHub: bahmed32</a>
               <br />
               <a href="mailto:bilqis.ali32@gmail.com" style={{ color: 'teal' }}>Email: bilqis.ali32@gmail.com</a>
-              <p>Fun Fact: I can tell where the coffee beans were sourced from just by tasting it.</p>
+              <p>Fun Fact: I can tell what part of the world a coffee is from just by tasting it.</p>
             </div>
           </div>
         </div>
