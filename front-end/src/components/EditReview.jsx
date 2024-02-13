@@ -42,7 +42,7 @@ const EditReview = ({ book, onCloseModal }) => {
     >
       <div className="flex justify-between gap-8">
         <img
-          src={cover_image}
+          src={cover_image ? cover_image : "/default-cover-image.png"}
           onError={handleImageError}
           alt="Book Cover"
           className="w-28 h-40 rounded-sm border"
@@ -52,7 +52,9 @@ const EditReview = ({ book, onCloseModal }) => {
             {title}
           </p>
           <p className="italic text-sm">by {author}</p>
-          <div className="text-sm">First Published: {first_published}</div>
+          <div className="text-sm">
+            First Published: {first_published ? first_published : "n/a"}
+          </div>
           <StarRating
             ratedRating={rating}
             isEditing={true}

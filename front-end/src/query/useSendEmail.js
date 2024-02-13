@@ -3,10 +3,10 @@ import { toast } from "react-hot-toast";
 
 import { store } from "../redux/store";
 
-const sendEmailApi = async (subject, text) => {
+const sendEmailApi = async (title, percentage) => {
   const { currentUser } = store.getState().user;
 
-  if (!subject || !text) {
+  if (!title || !percentage) {
     throw new Error("Subject and text are required");
   }
   try {
@@ -15,7 +15,7 @@ const sendEmailApi = async (subject, text) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ subject, text }),
+      body: JSON.stringify({ title, percentage }),
     });
     const data = await response.json();
     if (data.success === false) {
@@ -31,7 +31,7 @@ export const useSendEmail = () => {
   const queryClient = useQueryClient();
 
   const { isLoading: isSending, mutate: sendEmail } = useMutation({
-    mutationFn: ({ subject, text }) => sendEmailApi(subject, text),
+    mutationFn: ({ title, percentage }) => sendEmailApi(title, percentage),
     onSuccess: () => {
       toast.success("Email successfully sent!");
       queryClient.invalidateQueries({ queryKey: ["emails"] });

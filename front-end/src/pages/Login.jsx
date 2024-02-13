@@ -8,6 +8,7 @@ import {
   loginSuccess,
   loginFailure,
 } from "../redux/user/userSlice";
+import OAuth from "../components/OAuth";
 
 const formatName = (name) => {
   if (name.includes(" ")) {
@@ -114,6 +115,7 @@ const Login = () => {
         >
           {loading ? "loading..." : "log in"}
         </button>
+        <OAuth />
       </form>
       <div className="flex gap-2 mt-7 text-sm">
         <p>{"Don't have an account?"}</p>

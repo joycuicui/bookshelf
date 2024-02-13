@@ -71,20 +71,17 @@ progress[value]::-moz-progress-bar {
   animation: rotate 1.5s infinite linear;
 }
 
-/* Change the color of the arrows */
 .slick-prev:before,
 .slick-next:before {
-  color: green; /* Change to the desired color */
+  color: #059669;
 }
 
-/* Remove background color from arrows */
 .slick-prev,
 .slick-next {
   background-color: transparent;
 }
 
-/* Adjust the size of the arrows */
 .slick-prev:before,
 .slick-next:before {
-  font-size: 24px; /* Change to the desired font size */
+  font-size: 24px;
 }

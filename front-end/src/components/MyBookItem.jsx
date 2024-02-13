@@ -40,10 +40,7 @@ const MyBookItem = ({ book }) => {
   };
 
   const handleEmailReminder = () => {
-    sendEmail({
-      subject: "Your Reading Reminder From BookHaven 🚀",
-      text: "This is a email reminder for you to keep reading your book!",
-    });
+    sendEmail({ title, percentage: progressPercentage });
   };
 
   const handleDropdown = () => {
@@ -74,15 +71,17 @@ const MyBookItem = ({ book }) => {
   return (
     <div className="mx-12 my-8 flex gap-16 border border-gray-300 rounded-lg shadow justify-between">
       <img
-        src={cover_image}
+        src={cover_image ? cover_image : "/default-cover-image.png"}
         onError={handleImageError}
         alt="Book Cover"
-        className="w-42 rounded-l-lg"
+        className="w-44 h-72 rounded-l-lg"
       />
       <div className="flex flex-col gap-2 pt-2 flex-grow">
         <p className="text-gray-700 font-semibold text-lg pt-2">{title}</p>
         <p className="italic text-sm">by {author}</p>
-        <p className="text-sm">First Published: {first_published}</p>
+        <p className="text-sm">
+          First Published: {first_published ? first_published : "n/a"}
+        </p>
         <div className="mt-1 flex flex-col gap-3 items-start">
           <label className="flex items-center mt-2">
             <progress max="100" value={progressPercentage}></progress>

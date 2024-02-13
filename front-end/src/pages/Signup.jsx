@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import ReadingSvg1 from "../assets/reading1.svg";
+import OAuth from "../components/OAuth";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -25,20 +26,20 @@ const Signup = () => {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      // console.log(data);
-
       if (data.success === false) {
         // setError(data.message);
         setLoading(false);
         toast.error(data.message);
         return;
       }
-      setLoading(false);
-      setError(null);
-      toast.success("Account created successfully");
-      setTimeout(() => {
-        return navigate("/login");
-      }, 2000);
+      if (res.ok) {
+        setLoading(false);
+        setError(null);
+        toast.success("Account created successfully");
+        setTimeout(() => {
+          return navigate("/login");
+        }, 2000);
+      }
     } catch (err) {
       setLoading(false);
       setError(err.message);
@@ -113,6 +114,7 @@ const Signup = () => {
         >
           {loading ? "loading..." : "sign up"}
         </button>
+        <OAuth />
       </form>
       <div className="flex gap-2 mt-7 text-sm">
         <p>Have an account?</p>

@@ -1,37 +1,26 @@
 const express = require("express");
 const router = express.Router();
 
-const {
-  getAllUsers,
-  getUserById,
-} = require("../database/queries/user-queries.js");
+const verifyToken = require("../helpers/verifyUser");
+const { updateUser } = require("../controllers/user-controller.js");
 
-// GET /api/users
-router.get("/", (req, res) => {
-  getAllUsers()
-    .then((users) => {
-      res.json(users);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
-});
+router.patch("/:userId", verifyToken, updateUser);
 
 // GET /api/users/:id
-router.get("/:id", (req, res) => {
-  const id = req.params.id;
+// router.get("/:id", (req, res) => {
+//   const id = req.params.id;
 
-  getUserById(id)
-    .then((users) => {
-      if (!users.length) {
-        return res.send("no user with that id found");
-      }
+//   getUserById(id)
+//     .then((users) => {
+//       if (!users.length) {
+//         return res.send("no user with that id found");
+//       }
 
-      res.json(users[0]);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
-});
+//       res.json(users[0]);
+//     })
+//     .catch((err) => {
+//       res.status(500).json(err);
+//     });
+// });
 
 module.exports = router;

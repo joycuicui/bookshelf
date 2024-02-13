@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   HiMagnifyingGlass,
   HiMiniArrowRightOnRectangle,
@@ -10,6 +10,7 @@ import { useState } from "react";
 import { logoutSuccess } from "../redux/user/userSlice";
 
 const Header = (props) => {
+  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
@@ -54,8 +55,14 @@ const Header = (props) => {
     }
   };
 
+  const isHomePage = location.pathname === "/";
+
   return (
-    <header className="sticky top-0 z-50 bg-emerald-50 shadow-sm border-b-2 border-gray-100">
+    <header
+      className={`sticky top-0 z-50 bg-emerald-50 border-gray-100 ${
+        !isHomePage ? "shadow-sm border-p-2" : ""
+      }`}
+    >
       <div className="flex justify-between items-center mx-2 sm:mx-10 p-3 sm:py-4">
         <Link to="/" className="font-bold text-sm sm:text-xl">
           <span className="text-emerald-600">Book</span>
@@ -70,7 +77,7 @@ const Header = (props) => {
             placeholder="Search..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="text-xs outline-none w-28 rounded-full bg-emerald-100 px-2 py-1 transition-all duration-300 focus:ring focus:ring-emerald-300 focus:ring-opacity-50 sm:w-72 sm:focus:w-96"
+            className="text-xs outline-none w-28 rounded-full bg-emerald-100 px-2 py-1 transition-all duration-300 focus:ring-2 focus:ring-emerald-300 focus:ring-opacity-50 sm:w-72 sm:focus:w-96"
           />
           <button type="submit">
             <HiMagnifyingGlass className="text-emerald-600 mr-2 text-lg cursor-pointer" />
@@ -90,9 +97,9 @@ const Header = (props) => {
           {currentUser ? (
             <div className="flex gap-3 ml-3">
               <li>
-                <Link to="/user/books" className="hover:underline">
+                <Link to="/user/lists" className="hover:underline">
                   <img
-                    src={`/${currentUser.avatar}`}
+                    src={currentUser.avatar}
                     alt="User Avatar"
                     className="button-effect rounded-full w-8 h-8"
                   />

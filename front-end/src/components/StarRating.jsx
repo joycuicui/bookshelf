@@ -8,7 +8,12 @@ const messages = [
   "It was amazing!",
 ];
 
-export default function StarRating({ ratedRating, isEditing, onChange }) {
+export default function StarRating({
+  ratedRating,
+  isEditing,
+  onChange,
+  bookDetail,
+}) {
   const [rating, setRating] = useState(ratedRating || 0);
   const [tempRating, setTempRating] = useState(0);
 
@@ -31,6 +36,7 @@ export default function StarRating({ ratedRating, isEditing, onChange }) {
               onRate={() => handleRating(i + 1)}
               onHoverIn={() => setTempRating(i + 1)}
               onHoverOut={() => setTempRating(0)}
+              bookDetail={bookDetail}
             />
           ) : (
             <Star key={i} full={ratedRating >= i + 1} />
@@ -38,7 +44,7 @@ export default function StarRating({ ratedRating, isEditing, onChange }) {
         )}
       </div>
 
-      {isEditing ? (
+      {bookDetail ? null : isEditing ? (
         <p className="text-yellow-500 text-sm">
           {messages[tempRating ? tempRating - 1 : rating - 1]}
         </p>
@@ -49,11 +55,11 @@ export default function StarRating({ ratedRating, isEditing, onChange }) {
   );
 }
 
-function Star({ onRate, full, onHoverIn, onHoverOut, isEditing }) {
+function Star({ onRate, full, onHoverIn, onHoverOut, isEditing, bookDetail }) {
   return (
     <span
       role="button"
-      className="w-7 h-7 cursor-pointer block"
+      className={`cursor-pointer block ${bookDetail ? "w-9 h-9" : "w-7 h-7"}`}
       onClick={onRate}
       onMouseEnter={onHoverIn}
       onMouseLeave={onHoverOut}

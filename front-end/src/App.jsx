@@ -16,6 +16,8 @@ import MyProgress from "./pages/MyProgress";
 import MyLists from "./pages/MyLists";
 import MyReviews from "./pages/MyReviews";
 import MySettings from "./pages/MySettings";
+import MyProfile from "./pages/MyProfile";
+import BookDetailsPage from "./pages/BookDetails";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,11 +39,13 @@ const App = () => {
           <Route path="about" element={<About />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="books/:id" element={<BookDetailsPage />} />
           <Route element={<ProtectedRoute />}>
             <Route path="user" element={<UserPage />}>
               <Route path="books" element={<MyProgress />} />
               <Route path="lists" element={<MyLists />} />
               <Route path="reviews" element={<MyReviews />} />
+              <Route path="profile" element={<MyProfile />} />
               <Route path="settings" element={<MySettings />} />
             </Route>
           </Route>
@@ -59,7 +63,7 @@ const App = () => {
             duration: 5000,
           },
           style: {
-            fontSize: "16px",
+            fontSize: "14px",
             maxWidth: "500px",
             padding: "16px 24px",
             backgroundColor: "",

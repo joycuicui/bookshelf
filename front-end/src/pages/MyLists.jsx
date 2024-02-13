@@ -136,7 +136,7 @@ const MyBookCard = ({ book }) => {
       className="mx-12 mt-10 pb-2 border border-gray-300 rounded-lg shadow max-w-52"
     >
       <img
-        src={cover_image}
+        src={cover_image ? cover_image : "/default-cover-image.png"}
         onError={handleImageError}
         alt="Book Cover"
         className="w-56 h-[19rem] rounded-t-lg object-cover"
