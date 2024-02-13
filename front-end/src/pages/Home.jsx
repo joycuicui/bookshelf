@@ -83,7 +83,7 @@ const Home = () => {
       </div>
       <div className="mx-16 my-8">
         <h1 className="text-gray-600 font-semibold text-lg p-8">
-          Our Reading Enjoy Reading...
+          Our Readers Enjoy Reading...
         </h1>
         {/* overflow-hidden w-[650px] flex flex-col px-8 gap-6 */}
         <div className="px-8 mx-4">
