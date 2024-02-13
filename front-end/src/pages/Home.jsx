@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -9,6 +10,7 @@ import ReadingSvg3 from "../assets/reading3.svg";
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -56,12 +58,21 @@ const Home = () => {
             Join today and let storytelling ignite your imagination.
           </div>
           <span>
-            <Link
-              to={"/login"}
-              className="text-xs sm:text-sm text-amber-600 font-bold hover:underline"
-            >
-              Starting Reading Today &#10132;
-            </Link>
+            {currentUser ? (
+              <Link
+                to={"/user/lists"}
+                className="text-xs sm:text-sm text-amber-600 font-bold hover:underline"
+              >
+                Starting Reading Today &#10132;
+              </Link>
+            ) : (
+              <Link
+                to={"/login"}
+                className="text-xs sm:text-sm text-amber-600 font-bold hover:underline"
+              >
+                Starting Reading Today &#10132;
+              </Link>
+            )}
           </span>
         </div>
         <img
