@@ -27,6 +27,7 @@ const Header = (props) => {
       const result = await response.json();
       setSearchResults(result.docs);
       navigate(`/search?q=${searchTerm}`);
+      setSearchTerm(""); 
     } catch (err) {
       setError(err.message);
     }
