@@ -37,7 +37,9 @@ const progressRouter = require("./routes/progress-router");
 const reviewsRouter = require("./routes/reviews-router");
 const booksRouter = require("./routes/books-router");
 const emailRouter = require("./routes/emails-router");
-// const { createProxyMiddleware } = require("http-proxy-middleware");
+// const addRouter = require("./routes/add-router")
+
+
 
 // app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
@@ -46,6 +48,8 @@ app.use("/api/progress", progressRouter);
 app.use("/api/reviews", reviewsRouter);
 app.use("/api/books", booksRouter);
 app.use("/api/emails", emailRouter);
+// app.use("/api/addBook", addRouter);
+
 
 // error-handling middleware - catch errors and send error response to the client
 // trigger this middleware by calling next() with an error object in route handlers
