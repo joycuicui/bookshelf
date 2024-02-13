@@ -58,7 +58,7 @@ const BookDetailsPage = () => {
           <StarRating
             isEditing={true}
             bookDetail={true}
-            rating={0}
+            ratedRating={book.rating}
             onChange={handleNewRating}
           />
         </div>
