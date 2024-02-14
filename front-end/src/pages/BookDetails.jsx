@@ -75,17 +75,33 @@ const BookDetailsPage = () => {
             className="w-56 h-80 object-cover"
           />
         </div>
-        <div className="mx-auto mb-2">
-          <StarRating
-            isEditing={true}
-            bookDetail={true}
-            ratedRating={book.rating}
-            onChange={handleNewRating}
-          />
-        </div>
+
+          {currentUser ? (
+            book.list_id !== null ? (
+            <div className="mx-auto mb-2">
+              <StarRating
+                isEditing={true}
+                bookDetail={true}
+                ratedRating={book.rating}
+               onChange={handleNewRating}
+              />
+            </div>) :  (<div className="hidden"><h1>hide this div</h1></div>)
+          ) : (<div className="hidden"><h1>hide this div</h1></div>)}
+
         <div className="mx-auto">
-          {book.list_id === null ? (
-            <button
+          {currentUser ? (
+            book.list_id !== null ? (<h1 className="text-gray bg-emerald-300 hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-emerald-200 font-medium rounded-lg text-xs px-12 py-2 text-center inline-flex items-center">
+            Already in reading list.
+          </h1>) :  (<button
+              onClick={handleClick}
+              type="button"
+              className="text-gray bg-emerald-300 hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-emerald-200 font-medium rounded-lg text-xs px-12 py-2 text-center inline-flex items-center">
+              Add to list
+              {/*<span className="ml-2">
+                <HiChevronDown />
+              </span>*/}
+            </button>)
+          ) : (<button
             onClick={handleClick}
             type="button"
             className="text-gray bg-emerald-300 hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-emerald-200 font-medium rounded-lg text-xs px-12 py-2 text-center inline-flex items-center">
@@ -93,21 +109,7 @@ const BookDetailsPage = () => {
             {/*<span className="ml-2">
               <HiChevronDown />
             </span>*/}
-          </button>) : (<h1 className="text-gray bg-emerald-300 hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-emerald-200 font-medium rounded-lg text-xs px-12 py-2 text-center inline-flex items-center">
-          Already in reading list.
-        </h1>) }
-          
-          {/*<button
-            onClick={handleClick}
-            type="button"
-            className="text-gray bg-emerald-300 hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-emerald-200 font-medium rounded-lg text-xs px-12 py-2 text-center inline-flex items-center"
-          >
-            original Add to list
-            <span className="ml-2">
-              <HiChevronDown />
-            </span>
-          </button>*/}
-
+          </button>)}
           {/*<div
             id="dropdown"
             className={`${
