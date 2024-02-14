@@ -1,82 +1,128 @@
+import { Link } from "react-router-dom";
+import { FaGithub } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import Avatar from "../../public/female_avata.svg";
+
 const About = () => {
   return (
-    <div>
-      <h1 className="text-green-800 font-semibold text-xl p-8">About Us</h1>
-
-      <div className="flex flex-row justify-center space-evenly">
-        <div className="container p-6 border-gray-300 max-w-md h-auto mb-4">
-          <div className="ml-2 mt-8 flex gap-2 border border-gray-300 rounded-lg shadow justify-between p-6 items-center">
-            <div>
-              <div className="flex justify-center mb-4">
-                <img
-                  src="/picture_about_bilqis.png"
-                  alt="Profile"
-                  className="w-50 h-80 rounded-full"
-                />
+    <>
+      <div className="flex flex-col">
+        <div className="px-44 py-36 min-h-96 text-gray-700">
+          <p className="text-3xl mb-6">Your Gateway to Literary Delight</p>
+          <p className="text-3xl">
+            Where Every Read is an Adventure Waiting to Unfold
+          </p>
+        </div>
+        <div className="flex bg-neutral-100">
+          <div className="w-1/2 border-r">
+            <img src="/book3.jpg" alt="Book in nature" className="w-full" />
+          </div>
+          <div className="w-1/2 px-20 py-14">
+            <p className="text-lg font-semibold my-4">What Is Book Haven?</p>
+            <p className="leading-8 mt-14">
+              Introducing Book Haven, your personalized virtual bookshelf
+              designed to enhance your reading journey! With Book Haven, you can
+              effortlessly track your reading progress, share insightful
+              reviews, and stay motivated to finish every book you start.
+              Immerse yourself in the joy of reading with our intuitive progress
+              bar, which dynamically updates as you flip through pages, keeping
+              you engaged and on track. Never miss a beat with our convenient
+              reminders and notifications, delivered straight to your inbox.
+              Join Book Haven today and unlock the ultimate reading experience,
+              where every page turned brings you closer to literary fulfillment.
+            </p>
+          </div>
+        </div>
+        <div className="flex bg-neutral-100">
+          <div className="w-1/2 px-20 py-14">
+            <p className="text-lg font-semibold my-4">Who Are We?</p>
+            <p className="leading-8 mt-14">
+              We are a team of passionate full-stack web developers with a deep
+              love for literature. Our journey began from a shared enthusiasm
+              for reading, which led us to create BookHaven—a manifestation of
+              our commitment to merging technology with our love for books. With
+              our combined expertise in web development and our unwavering
+              dedication to promoting the joy of reading, we aim to create
+              meaningful experiences for book lovers everywhere.
+            </p>
+          </div>
+          <div className="w-1/2 border-r">
+            <img src="/book4.jpg" alt="Book in nature" className="w-full" />
+          </div>
+        </div>
+        <div className="px-44 py-36 min-h-96 text-gray-700">
+          <p className="text-3xl mb-8">Contact Us</p>
+          <div className="flex justify-between">
+            <div className="flex items-center gap-5">
+              <img
+                src="/picture_about_bilqis.png"
+                alt="Profile"
+                className="w-20 h-20 rounded-full"
+              />
+              <div>
+                <a href="https://github.com/bahmed32">
+                  <FaGithub className="inline mr-4" />
+                  Bilqis Ahmed
+                </a>
+                <div>
+                  <MdEmail className="inline mr-4" />
+                  bilqis.ali32@gmail.com
+                </div>
               </div>
-              <p>My Name is Bilqis Ahmed</p>
-              <a href="https://github.com/bahmed32" style={{ color: 'green' }}>GitHub: bahmed32</a>
-              <br />
-              <a href="mailto:bilqis.ali32@gmail.com" style={{ color: 'teal' }}>Email: bilqis.ali32@gmail.com</a>
-              <p>Fun Fact: I can tell where the coffee beans were sourced from just by tasting it.</p>
+            </div>
+            <div className="flex items-center gap-5">
+              <img
+                src={Avatar}
+                alt="Profile"
+                className="w-20 h-20 rounded-full"
+              />
+              <div>
+                <a href="https://github.com/joycuicui">
+                  <FaGithub className="inline mr-4" />
+                  Joy Cui
+                </a>
+                <div>
+                  <MdEmail className="inline mr-4" />
+                  joy.test.0331@gmail.com
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-5">
+              <img
+                src={Avatar}
+                alt="Profile"
+                className="w-20 h-20 rounded-full"
+              />
+              <div>
+                <a href="https://github.com/c22quiambao">
+                  <FaGithub className="inline mr-4" />
+                  Christel Quiambao
+                </a>
+                <div>
+                  <MdEmail className="inline mr-4" />
+                  christelquiambao@gmail.com
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
-
-        <div className="container p-6 border-gray-300 max-w-md h-auto mb-4">
-          <div className="ml-2 mt-8 flex gap-2 border border-gray-300 rounded-lg shadow justify-between p-6 items-center">
-            <div>
-              <div className="flex justify-center mb-4">
-                <img
-                  src={"/default-cover-image.png"}
-                  alt="Profile"
-                  className="w-50 h-80 rounded-full"
-                />
-              </div>
-              <p>My Name is Joy Cui</p>
-              <a href="https://github.com/joycuicui" style={{ color: 'Green' }}>GitHub: joycuicui</a>
-              <br />
-              <a href="mailto:cuiqijoy@outlook.com" style={{ color: 'Teal' }}>Email: cuiqijoy@outlook.com</a>
-              <p>Fun Fact:"At vero eos et accusamus atque corrupti ,  Nam libero tempore, cum soluta nobis est eligendi ."</p>
-            </div>
-          </div>
-        </div>
-
-
-        <div className="container p-6 border-gray-300 max-w-md h-auto mb-4">
-          <div className="ml-2 mt-8 flex gap-2 border border-gray-300 rounded-lg shadow justify-between p-6 items-center">
-            <div>
-              <div className="flex justify-center mb-4">
-                <img
-                  src={"/default-cover-image.png"}
-                  alt="Profile"
-                  className="w-50 h-80 rounded-full"
-                />
-              </div>
-              <p>My Name is Christel Quiambao</p>
-              <a href="https://github.com/c22quiambao" style={{ color: 'Green' }}>GitHub: c22quiambao</a>
-              <br />
-              <a href="mailto:christelquiambao@gmail.com" style={{ color: 'Teal' }}>Email: christelquiambao@gmail.com</a>
-              <p>Fun Fact:"At vero eos et accusamus atque corrupti ,  Nam libero tempore, cum soluta nobis est eligendi ."</p>
-            </div>
-          </div>
-        </div>
-
       </div>
-      <h1 className="text-green-800 font-semibold text-xl p-8">About The Project</h1>
-      <div className="w-30 flex border border-gray-300 rounded-lg shadow justify-between p-5 items-center">
-      <div className="ml-2 mt-8 flex gap-2 border border-gray-300 rounded-lg shadow justify-between p-6 items-center">
-        <p>Introducing Book Haven, your personalized virtual bookshelf designed to enhance your reading journey! With Book Haven, you can effortlessly track your reading progress, share insightful reviews, and stay motivated to finish every book you start.
 
-          Immerse yourself in the joy of reading with our intuitive progress bar, which dynamically updates as you flip through pages, keeping you engaged and on track. Celebrate your literary achievements with star badges upon completion, a testament to your dedication and love for literature.
-
-          Never miss a beat with our convenient reminders and notifications, delivered straight to your inbox or through in-app messages, ensuring you never lose sight of your reading goals.
-
-          Join Book Haven today and unlock the ultimate reading experience, where every page turned brings you closer to literary fulfillment.</p>
-          </div>
-      </div>
-    </div >
+      <footer className="bg-neutral-50 mt-10 border-t p-5 text-gray-500 text-xs flex flex-col justify-center items-center gap-2">
+        <div className="flex gap-3">
+          <Link to="/home" className="hover:underline">
+            Home
+          </Link>
+          <Link to="/about" className="hover:underline">
+            About
+          </Link>
+          <Link to="/search" className="hover:underline">
+            Search
+          </Link>
+        </div>
+        <div>&copy; {new Date().getFullYear()} BookHaven</div>
+      </footer>
+    </>
   );
 };
 
