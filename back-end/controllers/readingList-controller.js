@@ -2,6 +2,7 @@ const {
   getAllReadingListsByUserId,
   removeBookFromList,
   updateList,
+  addBookInLists
 } = require("../database/queries/readingLists-queries");
 
 const getAllReadingLists = async (req, res, next) => {
@@ -53,4 +54,24 @@ const moveToAnotherList = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllReadingLists, removeFromList, moveToAnotherList };
+const addToList = async (req, res, next) => {
+  console.log("req.body:", req.body);
+  const { bookId, listId, userId } = req.body;
+
+  console.log("listId, bookId, userId", listId, bookId, userId);
+
+  try {
+    const added = await addBookInLists(listId, bookId, userId);
+    if (!added) {
+      const error = new Error();
+      error.message = "Adding book to reading list failed";
+      error.statusCode = 404;
+      return next(error);
+    }
+    res.status(200).json("Book added to reading list");
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { getAllReadingLists, removeFromList, moveToAnotherList,addToList };

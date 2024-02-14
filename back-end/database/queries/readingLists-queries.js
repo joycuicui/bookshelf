@@ -135,4 +135,33 @@ const updateList = async (listId, bookId) => {
   }
 };
 
-module.exports = { getAllReadingListsByUserId, removeBookFromList, updateList };
+const addBookInLists = async (listId, bookId, userId) => {
+  console.log("addBookInLists listId, bookId, userId", listId, bookId, userId);
+  try {
+    const bookAuthorQuery = await db.query(
+      `
+      SELECT id FROM book_authors
+      WHERE book_id = $1;
+      `,
+      [bookId]
+    );
+    const bookAuthorId = bookAuthorQuery.rows[0].id;
+    console.log(bookAuthorId);
+    //const listId = 1;
+    const res = await db.query(
+      `
+      INSERT INTO book_lists (book_author_id, list_id, user_id)
+      VALUES
+      ($1, $2, $3) RETURNING *;
+      `,
+      [bookAuthorId, listId, userId]
+    );
+    console.log(res);
+    console.log(res.rows[0]);
+    return res.rows[0];
+  } catch (err) {
+    console.log(err.message);
+    // return false;
+  }
+};
+module.exports = { getAllReadingListsByUserId, removeBookFromList, updateList, addBookInLists };

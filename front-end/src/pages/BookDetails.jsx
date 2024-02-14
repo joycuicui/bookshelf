@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import StarRating from "../components/StarRating";
-import { HiChevronDown } from "react-icons/hi2";
+//import { HiChevronDown } from "react-icons/hi2";
 import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { useAddBookInList } from "../query/useAddBookInList";
 
 const BookDetailsPage = () => {
   const { id } = useParams(); // Get the book ID from the URL
@@ -10,9 +12,29 @@ const BookDetailsPage = () => {
   const [newRating, setNewRating] = useState(0);
   const { currentUser } = useSelector((state) => state.user);
 
-  const [showDropdown, setShowDropdown] = useState(false);
-  const handleDropdown = () => {
-    setShowDropdown((prev) => !prev);
+  //const [showDropdown, setShowDropdown] = useState(false);
+
+  const { isAdding, addBook } = useAddBookInList();
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    //setShowDropdown((prev) => !prev);
+    console.log("currentUser ----> ", currentUser)
+    console.log("Book State: ", book);
+
+    if(!currentUser){
+      toast.error("You must be logged in to add a book!");
+      return navigate("/login");
+    }
+  const listId = 1;
+  const bookId = book.book_id
+  const userId = currentUser.id
+  console.log ("passing bookId value from book details --->", bookId);
+  console.log ("passing listId value from book details --->", listId);
+
+  addBook({bookId, listId, userId});
+  return navigate("/user/lists");
+
   };
 
   useEffect(() => {
@@ -25,7 +47,6 @@ const BookDetailsPage = () => {
         const data = await response.json();
         console.log(data);
         setBook(data[0]);
-        console.log("Book State: ", book);
       } catch (error) {
         console.error("Error fetching book details:", error);
       }
@@ -63,17 +84,31 @@ const BookDetailsPage = () => {
           />
         </div>
         <div className="mx-auto">
-          <button
-            onClick={handleDropdown}
+          {book.list_id === null ? (
+            <button
+            onClick={handleClick}
+            type="button"
+            className="text-gray bg-emerald-300 hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-emerald-200 font-medium rounded-lg text-xs px-12 py-2 text-center inline-flex items-center">
+            Add to list
+            {/*<span className="ml-2">
+              <HiChevronDown />
+            </span>*/}
+          </button>) : (<h1 className="text-gray bg-emerald-300 hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-emerald-200 font-medium rounded-lg text-xs px-12 py-2 text-center inline-flex items-center">
+          Already in reading list.
+        </h1>) }
+          
+          {/*<button
+            onClick={handleClick}
             type="button"
             className="text-gray bg-emerald-300 hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-emerald-200 font-medium rounded-lg text-xs px-12 py-2 text-center inline-flex items-center"
           >
-            Add to list
+            original Add to list
             <span className="ml-2">
               <HiChevronDown />
             </span>
-          </button>
-          <div
+          </button>*/}
+
+          {/*<div
             id="dropdown"
             className={`${
               showDropdown ? "block" : "hidden"
@@ -101,7 +136,8 @@ const BookDetailsPage = () => {
                 </li>
               </ul>
             )}
-          </div>
+          </div>*/}
+
         </div>
       </div>
       <div className="w-2/3">
@@ -125,6 +161,10 @@ const BookDetailsPage = () => {
           <p>
             <span className="font-semibold text-gray-600 mr-2">Publisher:</span>
             {book.publisher}
+          </p>
+          <p>
+            <span className="font-semibold text-gray-600 mr-2">Total Number of Pages:</span>
+            {book.number_of_pages}
           </p>
           <p>
             <span className="font-semibold text-gray-600 mr-2">
