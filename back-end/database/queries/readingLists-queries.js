@@ -136,7 +136,7 @@ const updateList = async (listId, bookId) => {
 };
 
 const addBookInLists = async (listId, bookId, userId) => {
-  console.log("addBookInLists listId, bookId, userId", listId, bookId, userId);
+  //console.log("addBookInLists listId, bookId, userId", listId, bookId, userId);
   try {
     const bookAuthorQuery = await db.query(
       `
@@ -146,7 +146,7 @@ const addBookInLists = async (listId, bookId, userId) => {
       [bookId]
     );
     const bookAuthorId = bookAuthorQuery.rows[0].id;
-    console.log(bookAuthorId);
+    //console.log(bookAuthorId);
     //const listId = 1;
     const res = await db.query(
       `
@@ -156,8 +156,8 @@ const addBookInLists = async (listId, bookId, userId) => {
       `,
       [bookAuthorId, listId, userId]
     );
-    console.log(res);
-    console.log(res.rows[0]);
+    //console.log(res);
+    //console.log(res.rows[0]);
     return res.rows[0];
   } catch (err) {
     console.log(err.message);

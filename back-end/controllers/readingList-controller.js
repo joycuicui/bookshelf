@@ -55,10 +55,10 @@ const moveToAnotherList = async (req, res, next) => {
 };
 
 const addToList = async (req, res, next) => {
-  console.log("req.body:", req.body);
+  //console.log("req.body:", req.body);
   const { bookId, listId, userId } = req.body;
 
-  console.log("listId, bookId, userId", listId, bookId, userId);
+  //console.log("listId, bookId, userId", listId, bookId, userId);
 
   try {
     const added = await addBookInLists(listId, bookId, userId);
