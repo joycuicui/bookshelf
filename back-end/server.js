@@ -37,7 +37,7 @@ const progressRouter = require("./routes/progress-router");
 const reviewsRouter = require("./routes/reviews-router");
 const booksRouter = require("./routes/books-router");
 const emailRouter = require("./routes/emails-router");
-// const addRouter = require("./routes/add-router")
+
 
 
 
@@ -48,7 +48,7 @@ app.use("/api/progress", progressRouter);
 app.use("/api/reviews", reviewsRouter);
 app.use("/api/books", booksRouter);
 app.use("/api/emails", emailRouter);
-// app.use("/api/addBook", addRouter);
+
 
 
 // error-handling middleware - catch errors and send error response to the client

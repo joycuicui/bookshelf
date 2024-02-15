@@ -36,4 +36,19 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.post("/", async (req, res, next) => {
+  try {
+    const { title, author } = req.body;
+    const newBook = new Book({
+      title,
+      author,
+      listid: 1
+    });
+    await newBook.save();
+    return res.status(201).json({ success: true, message: "Book added successfully" });
+  } catch (error) {
+    return next(error);
+  }
+});
+
 module.exports = router;
