@@ -9,7 +9,9 @@ import { useAddBookInList } from "../query/useAddBookInList";
 const BookDetailsPage = () => {
   const { id } = useParams();
   const [book, setBook] = useState(null);
-  const [newRating, setNewRating] = useState(0);
+  const [list, setList] = useState(null);
+  const [review, setReview] = useState(null);
+  //const [newRating, setNewRating] = useState(0);
   const { currentUser } = useSelector((state) => state.user);
 
   //const [showDropdown, setShowDropdown] = useState(false);
@@ -40,20 +42,32 @@ const BookDetailsPage = () => {
   useEffect(() => {
     const fetchBookDetails = async () => {
       try {
-        const response = await fetch(`/api/books/${id}`);
+        let url = `/api/books/${id}`;
+
+        if (currentUser) {
+          url += `?currentUser=${currentUser.id}`;
+        }
+
+        const response = await fetch(url);
+
         if (!response.ok) {
           throw new Error("Failed to fetch book details");
         }
         const data = await response.json();
-        //console.log(data);
-        setBook(data[0]);
+        console.log("data home --->",data);
+        console.log(".bookDetailsAndAuthor[0] home --->",data.bookDetailsAndAuthor[0]);
+        console.log(".listDetails[0] home --->",data.listDetails[0]);
+        console.log(".reviewDetails[0] home --->",data.reviewDetails[0]);
+        setBook(data.bookDetailsAndAuthor[0]);
+        setList(data.listDetails[0]);
+        setReview(data.reviewDetails[0]);
       } catch (error) {
         console.error("Error fetching book details:", error);
       }
     };
 
     fetchBookDetails();
-  }, [id]);
+  }, [id, currentUser]);
 
   //const handleNewRating = (newRating) => {
   //  setNewRating(newRating);
@@ -64,7 +78,7 @@ const BookDetailsPage = () => {
   if (!book) {
     return <div>Could not find details about book</div>;
   }
-
+  
   return (
     <div className="flex flex-column px-52 py-14 gap-20 bg-gray-100 min-h-screen">
       <div className="flex flex-col gap-3">
@@ -77,12 +91,12 @@ const BookDetailsPage = () => {
         </div>
 
           {currentUser ? (
-            book.list_id !== null ? (
+            list.list_id !== null ? (
             <div className="mx-auto mb-2">
               <StarRating
                 isEditing={false}
                 bookDetail={true}
-                ratedRating={book.rating}
+                ratedRating={review.rating}
                //onChange={handleNewRating}
               />
             </div>) :  (<div className="hidden"><h1>hide this div</h1></div>)
@@ -90,7 +104,7 @@ const BookDetailsPage = () => {
 
         <div className="mx-auto">
           {currentUser ? (
-            book.list_id !== null ? (<button 
+            list.list_id !== null ? (<button 
             type="button"
             onClick= {() => navigate("/user/lists")}
             className="text-gray bg-emerald-300 hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-emerald-200 font-medium rounded-lg text-xs px-12 py-2 text-center inline-flex items-center">

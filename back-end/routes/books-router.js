@@ -22,8 +22,9 @@ router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     //console.log("book router - ID : ", id);
-
-    const book = await getBookById(id);
+    const { currentUser} = req.query; 
+    console.log(currentUser);
+    const book = await getBookById(id,currentUser);
     if (!book) {
       return res.status(404).json({ error: "Book not found" });
     }
