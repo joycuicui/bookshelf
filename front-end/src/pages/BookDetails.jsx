@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { useAddBookInList } from "../query/useAddBookInList";
 
 const BookDetailsPage = () => {
-  const { id } = useParams(); // Get the book ID from the URL
+  const { id } = useParams();
   const [book, setBook] = useState(null);
   const [newRating, setNewRating] = useState(0);
   const { currentUser } = useSelector((state) => state.user);
@@ -19,8 +19,8 @@ const BookDetailsPage = () => {
 
   const handleClick = () => {
     //setShowDropdown((prev) => !prev);
-    console.log("currentUser ----> ", currentUser)
-    console.log("Book State: ", book);
+    //console.log("currentUser ----> ", currentUser)
+    //console.log("Book State: ", book);
 
     if(!currentUser){
       toast.error("You must be logged in to add a book!");
@@ -29,8 +29,8 @@ const BookDetailsPage = () => {
   const listId = 1;
   const bookId = book.book_id
   const userId = currentUser.id
-  console.log ("passing bookId value from book details --->", bookId);
-  console.log ("passing listId value from book details --->", listId);
+  //console.log ("passing bookId value from book details --->", bookId);
+  //console.log ("passing listId value from book details --->", listId);
 
   addBook({bookId, listId, userId});
   return navigate("/user/lists");
@@ -45,7 +45,7 @@ const BookDetailsPage = () => {
           throw new Error("Failed to fetch book details");
         }
         const data = await response.json();
-        console.log(data);
+        //console.log(data);
         setBook(data[0]);
       } catch (error) {
         console.error("Error fetching book details:", error);
@@ -55,11 +55,11 @@ const BookDetailsPage = () => {
     fetchBookDetails();
   }, [id]);
 
-  const handleNewRating = (newRating) => {
-    setNewRating(newRating);
-  };
+  //const handleNewRating = (newRating) => {
+  //  setNewRating(newRating);
+  //};
 
-  console.log(newRating);
+  //console.log(newRating);
 
   if (!book) {
     return <div>Could not find details about book</div>;
@@ -80,19 +80,22 @@ const BookDetailsPage = () => {
             book.list_id !== null ? (
             <div className="mx-auto mb-2">
               <StarRating
-                isEditing={true}
+                isEditing={false}
                 bookDetail={true}
                 ratedRating={book.rating}
-               onChange={handleNewRating}
+               //onChange={handleNewRating}
               />
             </div>) :  (<div className="hidden"><h1>hide this div</h1></div>)
           ) : (<div className="hidden"><h1>hide this div</h1></div>)}
 
         <div className="mx-auto">
           {currentUser ? (
-            book.list_id !== null ? (<h1 className="text-gray bg-emerald-300 hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-emerald-200 font-medium rounded-lg text-xs px-12 py-2 text-center inline-flex items-center">
+            book.list_id !== null ? (<button 
+            type="button"
+            onClick= {() => navigate("/user/lists")}
+            className="text-gray bg-emerald-300 hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-emerald-200 font-medium rounded-lg text-xs px-12 py-2 text-center inline-flex items-center">
             Already in reading list.
-          </h1>) :  (<button
+          </button>) :  (<button
               onClick={handleClick}
               type="button"
               className="text-gray bg-emerald-300 hover:bg-emerald-400 focus:ring-4 focus:outline-none focus:ring-emerald-200 font-medium rounded-lg text-xs px-12 py-2 text-center inline-flex items-center">

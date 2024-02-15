@@ -72,7 +72,7 @@ const About = () => {
             </div>
             <div className="flex items-center gap-5">
               <img
-                src={Avatar}
+                src="/joy-cartoon.jpg"
                 alt="Profile"
                 className="w-20 h-20 rounded-full"
               />
@@ -83,13 +83,13 @@ const About = () => {
                 </a>
                 <div>
                   <MdEmail className="inline mr-4" />
-                  joy.test.0331@gmail.com
+                  cuiqijoy@outlook.com
                 </div>
               </div>
             </div>
             <div className="flex items-center gap-5">
               <img
-                src={Avatar}
+                src="/CQ_image.jpg"
                 alt="Profile"
                 className="w-20 h-20 rounded-full"
               />

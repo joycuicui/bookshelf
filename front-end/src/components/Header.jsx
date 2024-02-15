@@ -27,7 +27,7 @@ const Header = (props) => {
       const result = await response.json();
       setSearchResults(result.docs);
       navigate(`/search?q=${searchTerm}`);
-      setSearchTerm(""); 
+      setSearchTerm("");
     } catch (err) {
       setError(err.message);
     }
@@ -53,6 +53,10 @@ const Header = (props) => {
     } catch (err) {
       toast.error(err.message);
     }
+  };
+
+  const handleImageError = (e) => {
+    e.target.src = "/default-user.jpg";
   };
 
   const isHomePage = location.pathname === "/";
@@ -99,7 +103,12 @@ const Header = (props) => {
               <li>
                 <Link to="/user/lists" className="hover:underline">
                   <img
-                    src={currentUser.avatar}
+                    src={
+                      currentUser.avatar
+                        ? currentUser.avatar
+                        : "/default-user.jpg"
+                    }
+                    onError={handleImageError}
                     alt="User Avatar"
                     className="button-effect rounded-full w-8 h-8"
                   />

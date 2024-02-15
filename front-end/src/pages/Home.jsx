@@ -22,9 +22,9 @@ const Home = () => {
         const data = await response.json();
         setBooks(data);
         setLoading(false);
-        console.log("home data: ", data);
+        //console.log("home data: ", data);
       } catch (error) {
-        console.error("home : ", error);
+        //console.error("home : ", error);
 
         setLoading(false);
       }

@@ -21,14 +21,14 @@ router.get("/all", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    console.log("book router - ID : ", id);
+    //console.log("book router - ID : ", id);
 
     const book = await getBookById(id);
     if (!book) {
       return res.status(404).json({ error: "Book not found" });
     }
     res.json(book); 
-    console.log("book router - book details : ", book)
+    //console.log("book router - book details : ", book)
 
   } catch (err) {
     console.error("Error fetching book details:", err);
