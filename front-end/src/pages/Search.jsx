@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useAddBookAgain } from "../query/useAddBookToDbAndList";
+import { useAddBookInList } from "../query/useAddBookInList"; // Import the useAddBookInList hook
+import { useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
 
 const Search = () => {
   const location = useLocation();
@@ -10,38 +14,54 @@ const Search = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const searchTerm = new URLSearchParams(location.search).get("q");
+  const { currentUser } = useSelector((state) => state.user);
+
+  const navigate = useNavigate();
+  const { addBooked, isCreating } = useAddBookAgain();
+  const { isAdding, addBookInList } = useAddBookInList(); // Initialize useAddBookInList hook
+
+
 
   const handleAdd = async (item, id) => {
-    const bookData = {
-      title: item.title,
-      description: descriptions[id],
-      cover_image_small: coverImages[id],
-      cover_image_medium: coverImages[id],
-      publisher: item.publisher[0],
-      published_year: item.publish_year[0],
-      isbn: item.isbn[0],
-      external_id: id,
-      number_of_pages: item.number_of_pages_median,
-    };
+
+    if (!currentUser) {
+      toast.error("You must be logged in to add a book!");
+      return navigate("/login");
+    }
+    const listId = 1;
+    const userId = currentUser.id;
+
+
+
 
     try {
-      const response = await fetch("/api/addBook", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(bookData),
-      });
+      const bookData = {
+        title: item.title,
+        author: item.author_name ? item.author_name.join(", ") : "",
+        totalPages: item.number_of_pages_median,
+        description: descriptions[id] || "",
+        publisher: item.publisher ? item.publisher[0] : "",
+        publishedYear: item.first_publish_year || "",
+        bookCover: coverImages[id] || "",
+        cover_image_medium: coverImages[id] || "",
+        isbn: item.isbn || "",
+        external_id: item.key
+      };
 
-      if (!response.ok) {
-        throw new Error("Failed to add book");
-      }
+      const addedBook = await addBooked(bookData);
 
-      const data = await response.json();
-      console.log("Book added successfully:", data.bookId);
+
+
+
+
+      await addBookInList({ bookId, listId, userId });
+
+
+      toast.success("Book added to reading list!");
     } catch (error) {
       console.error("Error adding book:", error.message);
     }
+    return navigate("/user/books");
   };
 
   useEffect(() => {
@@ -63,7 +83,7 @@ const Search = () => {
                 const coverResponse = await fetch(
                   `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`
                 );
-                // console.log("coverResponse", coverResponse)
+
                 const coverBlob = await coverResponse.blob();
                 newCoverImages[id] = URL.createObjectURL(coverBlob);
               } else {
@@ -73,10 +93,8 @@ const Search = () => {
                 const descriptionResponse = await fetch(
                   `https://openlibrary.org/works/${id}.json`
                 );
-                // console.log('endpoint request', `https://openlibrary.org/works/${id}.json`);
-                // console.log('descriptionResponse', descriptionResponse);
                 const descriptionData = await descriptionResponse.json();
-                // console.log('descriptionData', descriptionData);
+
                 if (
                   descriptionData.description &&
                   typeof descriptionData.description === "string"
@@ -86,9 +104,6 @@ const Search = () => {
                     .trim();
                   newDescriptions[id] = cleanDescription;
                 }
-                console.log("newDescriptions", newDescriptions);
-                // console.log("id", id)
-                // console.log("descriptionResponse", descriptionResponse)
               } catch (error) {
                 console.error("description error:", error);
               }
@@ -160,11 +175,13 @@ const Search = () => {
                 <div className="flex flex-col justify-center bottom-4 right-4">
                   <button
                     onClick={() => handleAdd(item, id)}
+                    disabled={isAdding}
                     type="button"
-                    className="focus:outline-none text-white bg-green-400 hover:bg-green-800  focus:ring-green-300 focus:bg-green-800 active:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-200 dark:hover:bg-green-700 dark:focus:ring-green-00"
+                    className="focus:outline-none text-white bg-green-400 hover:bg-green-800 focus:ring-green-300 focus:bg-green-800 active:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-200 dark:hover:bg-green-700 dark:focus:ring-green-00"
                   >
-                    Add book
+                    {isCreating ? "Adding..." : "Add book"}
                   </button>
+
                 </div>
               </li>
             </div>
