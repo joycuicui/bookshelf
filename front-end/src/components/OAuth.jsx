@@ -29,7 +29,7 @@ const OAuth = () => {
       // console.log(data);
       if (res.ok) {
         dispatch(loginSuccess(data));
-        navigate("/user/books");
+        navigate("/user/lists");
       }
     } catch (error) {
       console.log(error);
